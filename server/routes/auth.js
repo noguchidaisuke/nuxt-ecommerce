@@ -7,4 +7,11 @@ router.get('/auth/user', async (req, res) => {
   res.json(user)
 })
 
+router.get('/auth/login', (req, res, next)=>{
+
+})
+
+router.get('/auth/register', (req, res, next)=>{
+
+})
 module.exports = router;
