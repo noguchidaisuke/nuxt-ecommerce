@@ -1,17 +1,74 @@
 <template>
-  <div class="product">
-    <v-card>
-      
-    </v-card>
-  </div>
+  <v-app>
+    <v-container>
+      <v-row>
+        <!-- space -->
+        <v-col cols="2" xs="0"></v-col>
+        <!-- main -->
+        <v-col cols="8" xs="12">
+          <v-row>
+            <v-col cols="6" xs="12">
+              <v-img src="/airmax1.jpg" class="img-fluid"></v-img>
+            </v-col>
+            <v-col cols="6" xs="12">
+              <v-content>
+                <span class="subtitle-1">カテゴリー</span>
+                <span class="title ml-12">100 yen</span>
+                <h1 class="mt-5">AirMax 90</h1>
+                <div class="ml-n2">
+                  <v-rating v-model="rating"></v-rating>
+                </div>
+                <template v-if="!isAdd">
+                  <v-btn large dark class="mt-8" @click="addCart">Add to Cart</v-btn>
+                </template>
+                <template v-else>
+                  <v-btn outlined @click="addCart">Cart Now</v-btn>
+                </template>
+              </v-content>
+
+            </v-col>
+          </v-row>
+        </v-col>
+        <!-- space -->
+        <v-col cols="2" xs="0"></v-col>
+      </v-row>
+    </v-container>
+    <v-divider></v-divider>
+    <v-container>
+      <v-row>
+        <v-col cols="2"></v-col>
+        <v-col cols="8">
+          <Review />
+        </v-col>
+        <v-col cols="2"></v-col>
+      </v-row>
+    </v-container>
+  </v-app>
 </template>
 
 <script>
+import Review from '@/components/Review'
 export default {
-
+  components: {
+    Review
+  },
+  data() {
+    return {
+      isAdd: false,
+      rating: 4
+    }
+  },
+  methods: {
+    addCart() {
+      this.isAdd = !this.isAdd
+    }
+  }
 }
 </script>
 
-<style>
-
+<style scoped >
+.ex{
+  height:500px;
+  background-color: #999;
+}
 </style>
