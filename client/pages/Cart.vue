@@ -13,7 +13,9 @@
                 <v-card-title>
                   <v-row class="mx-0" justify="space-between">
                     <div>Air Max 90</div>
-                    <div><span class="subtitle-1">¥</span> 3000</div>
+                    <div>
+                      <span class="subtitle-1">¥</span> 3000
+                    </div>
                   </v-row>
                 </v-card-title>
                 <v-card-subtitle>
@@ -37,13 +39,19 @@
               <div class="subtotal">
                 <v-row class="mx-0" justify="space-between">
                   <span class="font-weight-bold">小計</span>
-                  <span>$<span class="font-weight-bold">100</span></span>
+                  <span>
+                    $
+                    <span class="font-weight-bold">100</span>
+                  </span>
                 </v-row>
               </div>
               <div class="shipment_fee">
                 <v-row class="mx-0" justify="space-between">
                   <span class="font-weight-bold">送料</span>
-                  <span>$<span class="font-weight-bold">0</span></span>
+                  <span>
+                    $
+                    <span class="font-weight-bold">0</span>
+                  </span>
                 </v-row>
               </div>
               <div class="shipment"></div>
@@ -55,7 +63,15 @@
               <span>$100</span>
             </v-card-title>
           </v-card>
-          <v-btn block dark class="mt-10 title font-weight-black" rounded color="yellow darken-3" large>購入画面に進む</v-btn>
+          <v-btn
+            block
+            dark
+            class="mt-10 title font-weight-black"
+            rounded
+            color="yellow darken-3"
+            large
+            nuxt-link to="/payment"
+          >購入画面に進む</v-btn>
         </v-col>
       </v-row>
     </v-container>
@@ -67,12 +83,12 @@ export default {
   data() {
     return {
       products: [
-        { title: "nike", price: "200", imgUrl: "/airmax1.jpg"},
-        { title: "adidas", price: "200", imgUrl: "/airmax1.jpg"},
-        { title: "puma", price: "200", imgUrl: "/airmax1.jpg"},
-        { title: "balance", price: "200", imgUrl: "/airmax1.jpg"}
+        { title: "nike", price: "200", imgUrl: "/airmax1.jpg" },
+        { title: "adidas", price: "200", imgUrl: "/airmax1.jpg" },
+        { title: "puma", price: "200", imgUrl: "/airmax1.jpg" },
+        { title: "balance", price: "200", imgUrl: "/airmax1.jpg" }
       ]
-    }
-  },
-}
+    };
+  }
+};
 </script>

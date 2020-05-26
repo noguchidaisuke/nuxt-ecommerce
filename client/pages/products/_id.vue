@@ -11,20 +11,23 @@
               <v-img src="/airmax1.jpg" class="img-fluid"></v-img>
             </v-col>
             <v-col cols="6" xs="12">
-              <v-content>
-                <span class="subtitle-1">カテゴリー</span>
-                <span class="title ml-12">100 yen</span>
-                <h1 class="mt-5">AirMax 90</h1>
-                <div class="ml-n2">
-                  <v-rating v-model="rating"></v-rating>
-                </div>
+              <v-card flat>
+                <v-card-subtitle>
+                  カテゴリー
+                  <span class="title ml-12">100 yen</span>
+                </v-card-subtitle>
+                <v-divider></v-divider>
+                <v-card-title class="display-2 ">AirMax 90</v-card-title>
+                <v-card-text>
+                  <v-rating v-model="rating" color="orange" class="ml-n2"></v-rating>
+                </v-card-text>
                 <template v-if="!isAdd">
-                  <v-btn large dark class="mt-8" @click="addCart">Add to Cart</v-btn>
+                  <v-btn block dark class="mt-8" @click="addCart">Add to Cart</v-btn>
                 </template>
                 <template v-else>
-                  <v-btn outlined @click="addCart">Cart Now</v-btn>
+                  <v-btn block outlined class="mt-8" @click="addCart">Cart Now</v-btn>
                 </template>
-              </v-content>
+              </v-card>
 
             </v-col>
           </v-row>

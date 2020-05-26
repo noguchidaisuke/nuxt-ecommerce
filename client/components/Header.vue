@@ -12,11 +12,19 @@
         </v-list-item>
         <v-divider></v-divider>
         <v-list dense nav>
-          <v-list-item v-for="nav_list in nav_lists" :key="nav_list.name" nuxt-link :to="nav_list.link">
+          <v-list-item nuxt-link to="/cart">
             <v-list-item-icon>
               <v-badge color="green" content="3">
-                <v-icon>{{ nav_list.icon }}</v-icon>
+                <v-icon>mdi-cart-outline</v-icon>
               </v-badge>
+            </v-list-item-icon>
+            <v-list-item-content>
+              <v-list-item-title>Cart</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+          <v-list-item v-for="nav_list in nav_lists" :key="nav_list.name" nuxt-link :to="nav_list.link">
+            <v-list-item-icon>
+              <v-icon>{{ nav_list.icon }}</v-icon>
             </v-list-item-icon>
             <v-list-item-content>
               <v-list-item-title>{{ nav_list.name }}</v-list-item-title>
@@ -78,14 +86,12 @@
         </v-btn>
       </v-toolbar-items>
       <v-btn outlined >
-        <nuxt-link to="/login" class="white--text">
+        <nuxt-link to="/register" class="white--text">
           Get Started
         </nuxt-link>
       </v-btn>
     </v-app-bar>
-    <v-content>
-      <router-view />
-    </v-content>
+
   </div>
 </template>
 <script>
@@ -94,7 +100,6 @@ export default {
     return {
       drawer: false,
       nav_lists: [
-        { name: "Cart", icon: "mdi-cart-outline", link: "/cart" },
         { name: "Address", icon: "mdi-home-map-marker", link: "/addresses" },
         { name: "Profile", icon: "mdi-square-edit-outline", link: "/profile" },
         { name: "Orders", icon: "mdi-square-edit-outline", link: "/orders" }
