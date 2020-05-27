@@ -23,6 +23,6 @@ app.use(express.urlencoded({extended: false}));
 // router
 const userRoute = require('./routes/auth')
 
-app.use(userRoute)
+app.use('/api', userRoute)
 
 app.listen(4000)
