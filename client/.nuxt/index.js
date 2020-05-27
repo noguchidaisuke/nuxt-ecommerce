@@ -16,6 +16,7 @@ import nuxt_plugin_workbox_25d86d84 from 'nuxt_plugin_workbox_25d86d84' // Sourc
 import nuxt_plugin_nuxticons_19811040 from 'nuxt_plugin_nuxticons_19811040' // Source: ./nuxt-icons.js (mode: 'all')
 import nuxt_plugin_plugin_2fb498dc from 'nuxt_plugin_plugin_2fb498dc' // Source: ./vuetify/plugin.js (mode: 'all')
 import nuxt_plugin_axios_76faf268 from 'nuxt_plugin_axios_76faf268' // Source: ./axios.js (mode: 'all')
+import nuxt_plugin_plugin_9d66dcb8 from 'nuxt_plugin_plugin_9d66dcb8' // Source: ./auth/plugin.js (mode: 'all')
 
 // Component: <ClientOnly>
 Vue.component(ClientOnly.name, ClientOnly)
@@ -191,6 +192,10 @@ async function createApp (ssrContext) {
 
   if (typeof nuxt_plugin_axios_76faf268 === 'function') {
     await nuxt_plugin_axios_76faf268(app.context, inject)
+  }
+
+  if (typeof nuxt_plugin_plugin_9d66dcb8 === 'function') {
+    await nuxt_plugin_plugin_9d66dcb8(app.context, inject)
   }
 
   // If server-side, wait for async component to be resolved first

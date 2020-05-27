@@ -27,9 +27,7 @@ export default {
   */
   css: [
   ],
-  /*
-  ** Plugins to load before mounting the App
-  */
+
   plugins: [
   ],
   /*
@@ -38,15 +36,13 @@ export default {
   buildModules: [
     '@nuxtjs/vuetify',
   ],
-  /*
-  ** Nuxt.js modules
-  */
+
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
-    'nuxt-material-design-icons'
-    // '@nuxtjs/auth',
+    'nuxt-material-design-icons',
+    '@nuxtjs/auth',
     // '@nuxtjs/toast'
   ],
   /*
@@ -54,9 +50,22 @@ export default {
   ** See https://axios.nuxtjs.org/options
   */
   axios: {
+    baseURL: 'localhost:4000',
+    proxy: true
+  },
+
+  auth: {
+    strategies: {
+      local: {
+        endpoints: {
+          login: {
+            propertyName: "token"
+          }
+        }
+      }
+    }
   },
   /*
-  ** vuetify module configuration
   ** https://github.com/nuxt-community/vuetify-module
   */
   vuetify: {
@@ -75,9 +84,7 @@ export default {
       }
     }
   },
-  /*
-  ** Build configuration
-  */
+
   build: {
     /*
     ** You can extend webpack config here
