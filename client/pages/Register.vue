@@ -25,7 +25,7 @@
               ></v-text-field>
             </v-form>
           </v-card-text>
-          <v-btn class="mb-8" large dark >Submit</v-btn>
+          <v-btn class="mb-8" large dark @click="onRegister">Submit</v-btn>
         </v-card>
       </v-col>
     </v-row>
@@ -39,6 +39,31 @@ export default {
       name: "",
       email: "",
       password: ""
+    }
+  },
+  methods: {
+    async onRegister() {
+      try {
+        const data = {
+          name: this.name,
+          email: this.email,
+          password: this.password
+        }
+        const response = await this.$axios.$post('/api/auth/register', data)
+
+        if (response.success) {
+          this.$auth.loginWith('local', {
+            data: {
+              email: this.email,
+              password: this.password
+            }
+          })
+
+          this.$router.push('/')
+        }
+      } catch (err) {
+        console.log(err)
+      }
     }
   }
 }

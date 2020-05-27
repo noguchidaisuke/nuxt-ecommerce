@@ -1,5 +1,6 @@
 import colors from 'vuetify/es5/util/colors'
 
+const URL = 'http://localhost:4000'
 export default {
   mode: 'universal',
   /*
@@ -50,8 +51,12 @@ export default {
   ** See https://axios.nuxtjs.org/options
   */
   axios: {
-    baseURL: 'localhost:4000',
-    proxy: true
+    proxy: true,
+    baseURL: URL
+  },
+
+  proxy: {
+    "/api": URL
   },
 
   auth: {

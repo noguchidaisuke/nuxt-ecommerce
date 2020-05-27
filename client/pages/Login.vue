@@ -19,7 +19,7 @@
               ></v-text-field>
             </v-form>
           </v-card-text>
-          <v-btn class="mb-8" large dark >Submit</v-btn>
+          <v-btn class="mb-8" large dark @click="onLogin">Submit</v-btn>
         </v-card>
       </v-col>
     </v-row>
@@ -32,6 +32,20 @@ export default {
     return {
       email: "",
       password: ""
+    }
+  },
+  methods: {
+    async onLogin() {
+      try {
+        let response = await this.$auth.loginWith('local', {data: {
+            email: this.email,
+            password: this.password
+          }
+        });
+        this.$router.push('/');
+      } catch (err) {
+        console.log(err)
+      }
     }
   }
 }

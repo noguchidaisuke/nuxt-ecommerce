@@ -78,18 +78,27 @@
         </div>
       </form>
       <!-- Buttons -->
-      <v-toolbar-items class="ml-3">
-        <v-btn text>
-          <nuxt-link to="/login" class="white--text">
-             Login
+      <template v-if="$auth.$state.loggedIn">
+        <v-toolbar-items class="ml-3">
+          <v-btn text @click="$auth.logout()">
+              Logout
+          </v-btn>
+        </v-toolbar-items>
+      </template>
+      <template v-else>
+        <v-toolbar-items class="ml-3">
+          <v-btn text>
+            <nuxt-link to="/login" class="white--text">
+              Login
+            </nuxt-link>
+          </v-btn>
+        </v-toolbar-items>
+        <v-btn outlined >
+          <nuxt-link to="/register" class="white--text">
+            Get Started
           </nuxt-link>
         </v-btn>
-      </v-toolbar-items>
-      <v-btn outlined >
-        <nuxt-link to="/register" class="white--text">
-          Get Started
-        </nuxt-link>
-      </v-btn>
+      </template>
     </v-app-bar>
 
   </div>
