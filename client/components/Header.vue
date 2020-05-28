@@ -7,7 +7,7 @@
           <v-list-item-title class="title grey--text text--darken-2" dark color="primary">
             <v-list-item-icon>
               <v-icon>mdi-account-circle</v-icon>
-            </v-list-item-icon>{{$auth.$state.user.name}}
+            </v-list-item-icon>{{$auth.$state.user.name || "ようこそ"}}
           </v-list-item-title>
         </v-list-item>
         <v-divider></v-divider>
@@ -37,7 +37,9 @@
     <!-- Navbar -->
     <v-app-bar app clipped-left dark>
       <v-app-bar-nav-icon @click.stop="drawer=!drawer"></v-app-bar-nav-icon>
-      <v-toolbar-title><nuxt-link to="/" class="white--text">Amazon</nuxt-link></v-toolbar-title>
+      <v-toolbar-title>
+        <n-link to="/" class="white--text">Amazon</n-link>
+      </v-toolbar-title>
       <v-spacer></v-spacer>
       <!-- serch form -->
       <svg xmlns="http://www.w3.org/2000/svg" style="display:none">

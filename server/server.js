@@ -25,8 +25,10 @@ app.use(cors())
 // router
 const userRoute    = require('./routes/auth')
 const productRoute = require('./routes/product')
+const categoryRoute = require('./routes/category')
 
 app.use('/api', userRoute)
 app.use('/api', productRoute)
+app.use('/api', categoryRoute)
 
 app.listen(4000)

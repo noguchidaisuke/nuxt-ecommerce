@@ -45,3 +45,49 @@ router.get('/products/:id', async (req, res) => {
 })
 
 module.exports = router;
+
+// get all
+
+router.get('/products', async(req, res) => {
+  try {
+    let products = await Product.find()
+
+    res.json({
+      success: true,
+      products: products
+    })
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: err.message
+    })
+  }
+})
+
+// put cahnge only title
+router.put('/products/:id', upload.array("photos",4), async(req, res)=>{
+  try {
+    let product = await Product.findOne({_id: req.params.id})
+
+    if(req.body.title) product.title = req.body.title
+    if(req.body.description) product.description = req.body.description
+    if(req.body.price) product.price = req.body.price
+    if(req.body.categoryID) product.categoryID = req.body.categoryID
+    if(req.files[0]) {
+      let photos = req.files.map(file => file.location)
+      product.photos = photos
+    }
+
+    await product.save()
+
+    res.json({
+      success: true,
+      updatedProduct: product
+    })
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: err.message
+    })
+  }
+})

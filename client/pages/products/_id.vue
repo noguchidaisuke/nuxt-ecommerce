@@ -7,8 +7,8 @@
           <v-row justify="center">
             <v-col cols="12" sm="8">
               <v-row>
-                <v-col cols="6" sm="6" v-for="image in imageUrls" :key="image">
-                  <v-img :src="image" ></v-img>
+                <v-col cols="6" sm="6" v-for="image in product.photos" :key="image">
+                  <v-img :src="image" class="img-fluid" aspect-ratio="1"></v-img>
                 </v-col>
               </v-row>
             </v-col>
@@ -61,8 +61,15 @@ export default {
     Review
   },
   async asyncData({$axios, params}) {
-    let response = await $axios.$get(`/api/products/${params.id}`)
-    return { product: response.product }
+    try {
+      let response = await $axios.$get(`/api/products/${params.id}`)
+      console.log(response)
+      return {
+        product: response.product
+      }
+    } catch (err) {
+      console.log(err)
+    }
   },
   data() {
     return {
