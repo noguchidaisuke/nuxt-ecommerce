@@ -23,8 +23,10 @@ app.use(express.urlencoded({extended: false}));
 app.use(cors())
 
 // router
-const userRoute = require('./routes/auth')
+const userRoute    = require('./routes/auth')
+const productRoute = require('./routes/product')
 
 app.use('/api', userRoute)
+app.use('/api', productRoute)
 
 app.listen(4000)

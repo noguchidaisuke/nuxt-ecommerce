@@ -14,10 +14,12 @@
               <v-card flat>
                 <v-card-subtitle>
                   カテゴリー
-                  <span class="title ml-12">100 yen</span>
                 </v-card-subtitle>
                 <v-divider></v-divider>
                 <v-card-title class="display-2 ">AirMax 90</v-card-title>
+                <v-card-text class="title">
+                  ¥100
+                </v-card-text>
                 <v-card-text>
                   <v-rating v-model="rating" color="orange" class="ml-n2"></v-rating>
                 </v-card-text>
@@ -27,6 +29,11 @@
                 <template v-else>
                   <v-btn block outlined class="mt-8" @click="addCart">Cart Now</v-btn>
                 </template>
+                 <v-divider class="mt-5"></v-divider>
+                 <template v-if="description">
+                   <v-card-subtitle>アイテム詳細</v-card-subtitle>
+                   <v-card-text class="black--text">{{description}}</v-card-text>
+                 </template>
               </v-card>
 
             </v-col>
@@ -55,10 +62,15 @@ export default {
   components: {
     Review
   },
+  async asyncData({$axios, params}) {
+    let response = await $axios.$get(`/api/products/${params.id}`)
+    return { product: response.product }
+  },
   data() {
     return {
       isAdd: false,
-      rating: 4
+      rating: 4,
+      description: "lorem"
     }
   },
   methods: {

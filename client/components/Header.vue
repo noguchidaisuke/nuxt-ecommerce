@@ -7,7 +7,7 @@
           <v-list-item-title class="title grey--text text--darken-2" dark color="primary">
             <v-list-item-icon>
               <v-icon>mdi-account-circle</v-icon>
-            </v-list-item-icon>Daisuke
+            </v-list-item-icon>{{$auth.$state.user.name}}
           </v-list-item-title>
         </v-list-item>
         <v-divider></v-divider>
@@ -111,7 +111,7 @@ export default {
       nav_lists: [
         { name: "Address", icon: "mdi-home-map-marker", link: "/addresses" },
         { name: "Profile", icon: "mdi-square-edit-outline", link: "/profile" },
-        { name: "Orders", icon: "mdi-square-edit-outline", link: "/orders" }
+        { name: "Orders", icon: "storage", link: "/orders" }
       ]
     };
   }

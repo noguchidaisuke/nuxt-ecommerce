@@ -55,9 +55,6 @@ export default {
     baseURL: URL
   },
 
-  proxy: {
-    "/api": URL
-  },
 
   auth: {
     strategies: {
