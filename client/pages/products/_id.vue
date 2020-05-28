@@ -2,23 +2,25 @@
   <v-app>
     <v-container>
       <v-row>
-        <!-- space -->
-        <v-col cols="2" xs="0"></v-col>
         <!-- main -->
-        <v-col cols="8" xs="12">
-          <v-row>
-            <v-col cols="6" xs="12">
-              <v-img src="/airmax1.jpg" class="img-fluid"></v-img>
+        <v-col cols="12">
+          <v-row justify="center">
+            <v-col cols="12" sm="8">
+              <v-row>
+                <v-col cols="6" sm="6" v-for="image in imageUrls" :key="image">
+                  <v-img :src="image" ></v-img>
+                </v-col>
+              </v-row>
             </v-col>
-            <v-col cols="6" xs="12">
+            <v-col cols="12" sm="4" >
               <v-card flat>
                 <v-card-subtitle>
                   カテゴリー
                 </v-card-subtitle>
                 <v-divider></v-divider>
-                <v-card-title class="display-2 ">AirMax 90</v-card-title>
+                <v-card-title class="display-2 ">{{product.title}}</v-card-title>
                 <v-card-text class="title">
-                  ¥100
+                  ¥{{product.price}}
                 </v-card-text>
                 <v-card-text>
                   <v-rating v-model="rating" color="orange" class="ml-n2"></v-rating>
@@ -32,25 +34,21 @@
                  <v-divider class="mt-5"></v-divider>
                  <template v-if="description">
                    <v-card-subtitle>アイテム詳細</v-card-subtitle>
-                   <v-card-text class="black--text">{{description}}</v-card-text>
+                   <v-card-text class="black--text">{{product.description}}</v-card-text>
                  </template>
               </v-card>
 
             </v-col>
           </v-row>
         </v-col>
-        <!-- space -->
-        <v-col cols="2" xs="0"></v-col>
       </v-row>
     </v-container>
     <v-divider></v-divider>
     <v-container>
-      <v-row>
-        <v-col cols="2"></v-col>
-        <v-col cols="8">
+      <v-row justify="center">
+        <v-col cols="12" sm="8">
           <Review />
         </v-col>
-        <v-col cols="2"></v-col>
       </v-row>
     </v-container>
   </v-app>
@@ -70,7 +68,12 @@ export default {
     return {
       isAdd: false,
       rating: 4,
-      description: "lorem"
+      description: "lorem",
+      imageUrls: [
+        "/airmax1.jpg",
+        "/airmax1-detail.jpg",
+        "/airmax1-detail2.jpg"
+      ]
     }
   },
   methods: {
