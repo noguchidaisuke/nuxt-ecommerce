@@ -31,7 +31,7 @@ router.post('/products', upload.array("photos",4), async (req, res) => {
 //get one
 router.get('/products/:id', async (req, res) => {
   try {
-    let product = await Product.findOne({_id: req.params.id})
+    let product = await Product.findOne({_id: req.params.id}).populate('category')
     res.json({
       success: true,
       product: product
@@ -72,7 +72,7 @@ router.put('/products/:id', upload.array("photos",4), async(req, res)=>{
     if(req.body.title) product.title = req.body.title
     if(req.body.description) product.description = req.body.description
     if(req.body.price) product.price = req.body.price
-    if(req.body.categoryID) product.categoryID = req.body.categoryID
+    if(req.body.category) product.category = req.body.category
     if(req.files[0]) {
       let photos = req.files.map(file => file.location)
       product.photos = photos

@@ -30,6 +30,7 @@ export default {
   ],
 
   plugins: [
+    { src: "~/plugins/localStorage.js", ssr: false}
   ],
   /*
   ** Nuxt.js dev-modules

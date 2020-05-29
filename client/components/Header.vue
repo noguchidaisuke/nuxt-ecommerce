@@ -7,14 +7,20 @@
           <v-list-item-title class="title grey--text text--darken-2" dark color="primary">
             <v-list-item-icon>
               <v-icon>mdi-account-circle</v-icon>
-            </v-list-item-icon>{{$auth.$state.user.name || "ようこそ"}}
+            </v-list-item-icon>
+            <template v-if="$auth.loggedIn">
+              {{$auth.$state.user.name }}
+            </template>
+            <template v-else>
+              "よろしく"
+            </template>
           </v-list-item-title>
         </v-list-item>
         <v-divider></v-divider>
         <v-list dense nav>
           <v-list-item nuxt-link to="/cart">
             <v-list-item-icon>
-              <v-badge color="green" content="3">
+              <v-badge color="green" :content="$store.state.cartLength">
                 <v-icon>mdi-cart-outline</v-icon>
               </v-badge>
             </v-list-item-icon>
