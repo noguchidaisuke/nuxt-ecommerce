@@ -12,6 +12,7 @@ router.post('/products', upload.array("photos",4), async (req, res) => {
     product.title       = req.body.title;
     product.description = req.body.description;
     product.price       = req.body.price;
+    product.category    = req.body.category;
     product.photos.push(...files);
 
     await product.save()
@@ -31,7 +32,7 @@ router.post('/products', upload.array("photos",4), async (req, res) => {
 //get one
 router.get('/products/:id', async (req, res) => {
   try {
-    let product = await Product.findOne({_id: req.params.id}).populate('category')
+    let product = await Product.findOne({_id: req.params.id}).populate('category').populate('reviews','rating')
     res.json({
       success: true,
       product: product
@@ -50,7 +51,7 @@ module.exports = router;
 
 router.get('/products', async(req, res) => {
   try {
-    let products = await Product.find()
+    let products = await Product.find();
 
     res.json({
       success: true,

@@ -23,7 +23,7 @@
                   ¥{{product.price}}
                 </v-card-text>
                 <v-card-text>
-                  <v-rating v-model="rating" color="orange" class="ml-n2"></v-rating>
+                  <v-rating :value="product.averageRate" color="orange" class="ml-n2" dense readonly></v-rating>
                 </v-card-text>
                 <template v-if="!isAdd">
                   <v-btn block dark class="mt-8" @click="addCart">Add to Cart</v-btn>
@@ -44,7 +44,8 @@
     <v-container>
       <v-row justify="center">
         <v-col cols="12" sm="8">
-          <Review />
+          <v-btn nuxt-link :to="`/reviews/${product._id}`" class="mb-10" dark >新規レビューを投稿する</v-btn>
+          <Review :reviews="reviews"/>
         </v-col>
       </v-row>
     </v-container>
@@ -59,15 +60,19 @@ export default {
   },
   async asyncData({$axios, params}) {
     try {
-      let response = await $axios.$get(`/api/products/${params.id}`)
+      let promiseProduct =  $axios.$get(`/api/products/${params.id}`)
+      let promiseReviews =  $axios.$get(`/api/reviews/${params.id}`)
+
+      let [resProduct, resReviews] = await Promise.all([promiseProduct, promiseReviews])
+      console.log(resReviews.reviews)
       return {
-        product: response.product
+        product: resProduct.product,
+        reviews: resReviews.reviews
       }
     } catch (err) {
       console.log(err)
     }
   },
-
   data() {
     return {
       isAdd: false,
