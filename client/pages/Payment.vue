@@ -2,14 +2,85 @@
   <div class="payment">
     <v-container>
       <v-row justify="center">
-        <v-col cols="10" sm="8">
+        <v-col cols="12" sm="9">
           <v-card>
-            <v-card-title>決済画面</v-card-title>
-            <v-btn block color="orange">カード</v-btn>
-            <v-card-subtitle>合計金額 ¥<span class="title">1000</span></v-card-subtitle>
-
-            <v-btn dark rounded large class="mb-5 ml-3">購入</v-btn>
+            <v-card-title class="grey darken-4 white--text">
+              お届け先住所
+            </v-card-title>
+            <v-card-text>
+              <v-form>
+                <v-row>
+                  <v-col cols="12">
+                    <v-text-field
+                      label="名前"
+                      outlined
+                      dense
+                      class="mb-n5 mt-3"
+                      v-model="address.name"
+                    ></v-text-field>
+                  </v-col>
+                  <v-col cols="6">
+                    <v-text-field
+                      label="国"
+                      outlined
+                      dense
+                      class="mb-n8"
+                      v-model="address.country"
+                    ></v-text-field>
+                  </v-col>
+                  <v-col cols="6">
+                    <v-text-field
+                      label="都道府県"
+                      outlined
+                      dense
+                      class="mb-n8"
+                      v-model="address.state"
+                    ></v-text-field>
+                  </v-col>
+                  <v-col cols="12">
+                    <v-text-field
+                      label="住所"
+                      outlined
+                      dense
+                      class="mb-n3"
+                      v-model="address.address"
+                    ></v-text-field>
+                  </v-col>
+                  <v-col cols="6">
+                    <v-text-field
+                      label="郵便番号"
+                      outlined
+                      dense
+                      v-model="address.zipCode"
+                    ></v-text-field>
+                  </v-col>
+                  <v-col cols="6">
+                    <v-text-field
+                      label="電話番号"
+                      outlined
+                      dense
+                      v-model="address.phoneNumber"
+                    ></v-text-field>
+                  </v-col>
+                  <v-col cols="12">
+                    <v-btn large rounded dark @click="onSubmitAddress">保存して次へ</v-btn>
+                  </v-col>
+                  <template v-if="addedAddress">
+                    <v-col cols="12">
+                      <v-radio-group v-model="arrivalDate" :mandatory="true" block>
+                        <v-radio :label="`通常配送(配達予定日: ${defaultArrivalDate})`" :value="defaultArrivalDate"></v-radio>
+                        <v-radio :label="`最短(配達予定日: ${earlyArrivalDate})`" :value="earlyArrivalDate"></v-radio>
+                      </v-radio-group>
+                      <v-btn large rounded dark @click="checkdShipment = true">支払いに進む</v-btn>
+                    </v-col>
+                  </template>
+                </v-row>
+              </v-form>
+            </v-card-text>
           </v-card>
+          <template v-if="true">
+           <Stripe :arrivalDate="arrivalDate"/>
+          </template>
         </v-col>
       </v-row>
     </v-container>
@@ -17,11 +88,50 @@
 </template>
 
 <script>
+import moment from 'moment'
+import Stripe from '@/components/Stripe'
 export default {
+  components: {
+    Stripe,
+  },
+  async asyncData({$axios}) {
+    const response = await $axios.$get('/api/addresses')
+    return {
+      address: response.address
+    }
+  },
+  computed: {
+    defaultArrivalDate() {
+      return moment().add(5,"d").format("YYYY-MM-DD");
+    },
+    earlyArrivalDate() {
+      return moment().add(2,"d").format("YYYY-MM-DD");
+    }
+  },
+  data() {
+    return {
+      addedAddress: false,
+      checkdShipment: false,
+      arrivalDate: ""
+    }
+  },
+  methods: {
+    async onSubmitAddress() {
+      const data = {
+        country: this.address.country,
+        state: this.address.state,
+        address: this.address.address,
+        name: this.address.name,
+        zipCode: this.address.zipCode,
+        phoneNumber: this.address.phoneNumber
+      }
+      const response = await this.$axios.$post('/api/addresses', data)
 
+      if (response.success) this.addedAddress = true
+    },
+    onSubmitShipment() {
+      this.checkdShipment = true
+    }
+  }
 }
 </script>
-
-<style>
-
-</style>

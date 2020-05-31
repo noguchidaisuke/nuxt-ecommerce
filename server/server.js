@@ -23,15 +23,18 @@ app.use(express.urlencoded({extended: false}));
 app.use(cors())
 
 // router
-const userRoute    = require('./routes/auth')
-const productRoute = require('./routes/product')
+const userRoute     = require('./routes/auth')
+const productRoute  = require('./routes/product')
 const categoryRoute = require('./routes/category')
-const reviewRoute = require('./routes/review')
-
+const reviewRoute   = require('./routes/review')
+const addressRoute  = require('./routes/address')
+const paymentRoute  = require('./routes/payment')
 
 app.use('/api', userRoute)
 app.use('/api', productRoute)
 app.use('/api', categoryRoute)
 app.use('/api', reviewRoute)
+app.use('/api', addressRoute)
+app.use('/api', paymentRoute)
 
 app.listen(4000)

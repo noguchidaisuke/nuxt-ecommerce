@@ -1,7 +1,7 @@
 
 export const state = () => ({
   cart: [],
-  cartLength: 0,
+  cartLength: 0
 })
 
 
@@ -52,10 +52,12 @@ export const mutations = {
   },
   removeProductFromCart(state, product) {
     state.cartLength -= product.quantity
-    console.log(product)
     let index = state.cart.indexOf(product)
-    console.log(index)
     state.cart.splice(index, 1)
+  },
+  clearCart(state) {
+    state.cart = [];
+    state.cartLength = 0
   }
 }
 
