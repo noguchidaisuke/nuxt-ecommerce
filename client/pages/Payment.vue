@@ -3,6 +3,11 @@
     <v-container>
       <v-row justify="center">
         <v-col cols="12" sm="9">
+          <div class="subtitle-2">合計金額</div>
+          <div class="title mb-6">
+            <span>{{getCartLength}}点</span>
+            <span>{{getCartTotalPrice}}円</span>
+          </div>
           <v-card>
             <v-card-title class="grey darken-4 white--text">
               お届け先住所
@@ -78,7 +83,7 @@
               </v-form>
             </v-card-text>
           </v-card>
-          <template v-if="true">
+          <template v-if="checkdShipment">
            <Stripe :arrivalDate="arrivalDate"/>
           </template>
         </v-col>
@@ -90,7 +95,9 @@
 <script>
 import moment from 'moment'
 import Stripe from '@/components/Stripe'
+import {mapGetters} from 'vuex'
 export default {
+  middleware: 'auth',
   components: {
     Stripe,
   },
@@ -101,6 +108,7 @@ export default {
     }
   },
   computed: {
+    ...mapGetters(["getCartTotalPrice", "getCartLength"]),
     defaultArrivalDate() {
       return moment().add(5,"d").format("YYYY-MM-DD");
     },

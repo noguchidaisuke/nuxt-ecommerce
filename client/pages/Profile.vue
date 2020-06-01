@@ -3,7 +3,7 @@
     <v-row justify="center">
       <v-col cols="8" md="6" lg="5">
         <v-card class="text-center">
-          <h2 class="text-center pt-4">Profile</h2>
+          <h2 class="text-center pt-4">プロフィール</h2>
           <v-card-text>
             <v-form>
               <v-text-field
@@ -25,7 +25,7 @@
               ></v-text-field>
             </v-form>
           </v-card-text>
-          <v-btn class="mb-8" large dark >Edit</v-btn>
+          <v-btn class="mb-8" large dark @click="onEditUser">変更</v-btn>
         </v-card>
       </v-col>
     </v-row>
@@ -34,14 +34,23 @@
 
 <script>
 export default {
-  async asyncData() {
-    
-  },
+  middleware: 'auth',
   data() {
     return {
-      name: "Johe",
-      email: "Johe@gmail.com",
-      password: "john"
+      name: this.$auth.user.name,
+      email: this.$auth.user.email,
+      password: "password"
+    }
+  },
+  methods: {
+    async onEditUser() {
+      const data = {
+        name: this.name,
+        email: this.email
+      }
+      const response = await this.$axios.$put('/api/auth/user',data)
+      await this.$auth.setUser(response.user)
+      this.$router.replace('/');
     }
   }
 }

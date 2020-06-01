@@ -46,7 +46,7 @@ export default {
     '@nuxtjs/pwa',
     'nuxt-material-design-icons',
     '@nuxtjs/auth',
-    // '@nuxtjs/toast'
+    '@nuxtjs/toast'
   ],
   /*
   ** Axios module configuration
@@ -65,8 +65,16 @@ export default {
             propertyName: "token"
           }
         }
-      }
+      },
+      logout: false
     }
+  },
+
+  toast: {
+    // 右上にtoastを表示
+    position: 'top-right',
+    // 特に指定しなくても5秒で消えるように設定
+    duration: 3000
   },
   /*
   ** https://github.com/nuxt-community/vuetify-module
@@ -82,7 +90,7 @@ export default {
           info: colors.teal.lighten1,
           warning: colors.amber.base,
           error: colors.deepOrange.accent4,
-          success: colors.green.accent3
+          success: colors.lightGreen.accent3
         }
       }
     }

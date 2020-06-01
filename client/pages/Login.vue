@@ -39,14 +39,15 @@ export default {
   methods: {
     async onLogin() {
       try {
-        let response = await this.$auth.loginWith('local', {data: {
+        await this.$auth.loginWith('local', {data: {
             email: this.email,
             password: this.password
           }
         });
+        this.$toast.success('ログイン完了');
         this.$router.push('/');
       } catch (err) {
-        console.log(err)
+        this.$toast.error(err);
       }
     }
   }

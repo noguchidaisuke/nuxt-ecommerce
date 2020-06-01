@@ -10,7 +10,7 @@ router.post('/reviews/:id', [upload.single("photo"), verifyToken], async (req, r
   try {
     let review = new Review()
 
-    review.photo     = req.file.location
+    if(req.file) review.photo     = req.file.location
     review.rating    = req.body.rating;
     review.headline  = req.body.headline;
     review.body      = req.body.body;
@@ -27,6 +27,7 @@ router.post('/reviews/:id', [upload.single("photo"), verifyToken], async (req, r
       review: review
     })
   } catch (err) {
+    console.log(err)
     res.status(500).json({
       success: false,
       err: err.message

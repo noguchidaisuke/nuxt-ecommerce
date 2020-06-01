@@ -1,6 +1,6 @@
 <template>
   <div class="review">
-    <v-card flat class="mb-12" v-for="review in reviews" :key="review._id">
+    <v-card flat class="mb-5 pa-3 grey lighten-5" v-for="review in reviews" :key="review._id">
       <div>
         <v-avatar color="indigo" class="mr-4" size="30px">
           <v-icon dark>mdi-account-circle</v-icon>
@@ -23,6 +23,7 @@
         <span>{{review.headline}}</span>
       </div>
       <v-card-text>{{review.body}}</v-card-text>
+      <v-img :src="review.photo" max-width="100px" max-height="100px"></v-img>
       <!-- <v-btn dark small class="mt-5">役に立った！</v-btn> -->
     </v-card>
   </div>

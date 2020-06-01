@@ -16,6 +16,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import moment from 'moment'
 export default {
   props: {
     arrivalDate: {
@@ -45,7 +46,8 @@ export default {
           token: token,
           totalPrice: this.getCartTotalPrice,
           cart: this.getCart,
-          arrivalDate: this.arrivalDate
+          arrivalDate: this.arrivalDate,
+          orderDate: moment().format("YYYY-MM-DD")
         });
         if (response.success) {
           this.$store.commit('clearCart')

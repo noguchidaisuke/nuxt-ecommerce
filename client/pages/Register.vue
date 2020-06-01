@@ -52,18 +52,19 @@ export default {
           password: this.password
         }
         const response = await this.$axios.$post('/api/auth/register', data)
-
         if (response.success) {
-          this.$auth.loginWith('local', {
+          await this.$auth.loginWith('local', {
             data: {
               email: this.email,
               password: this.password
             }
           })
 
+          this.$toast.success('登録完了しました');
           this.$router.push('/')
         }
       } catch (err) {
+        this.$toast.error(err);
         console.log(err)
       }
     }

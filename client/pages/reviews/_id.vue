@@ -44,6 +44,7 @@
 
 <script>
 export default {
+  middleware: 'auth',
   async asyncData({$axios, params}) {
     let response = await $axios.$get(`/api/products/${params.id}`)
     return { product: response.product }
@@ -62,18 +63,22 @@ export default {
       this.file = e
       this.fileName     = e.name
     },
-    async onSubmitReview() {
+    onSubmitReview() {
       let data = new FormData()
 
       data.append('headline', this.headline)
       data.append('rating', this.rating)
       data.append('body', this.body)
       data.append('productID', this.product._id)
-      data.append('photo', this.file, this.fileName)
+      if (this.file) data.append('photo', this.file, this.fileName)
 
-      await this.$axios.$post(`/api/reviews/${this.$route.params.id}`, data)
-
-      this.$router.push(`/products/${this.$route.params.id}`)
+      this.$axios.$post(`/api/reviews/${this.$route.params.id}`, data)
+        .then((result) => {
+          this.$toast.success('投稿しました');
+          this.$router.push(`/products/${this.$route.params.id}`)
+        }).catch((err) => {
+          this.$toast.error('投稿失敗しました');
+        });
     }
   }
 }

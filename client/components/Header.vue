@@ -8,11 +8,11 @@
             <v-list-item-icon>
               <v-icon>mdi-account-circle</v-icon>
             </v-list-item-icon>
-            <template v-if="$auth.loggedIn">
-              {{$auth.$state.user.name }}
+            <template v-if="$store.state.auth.loggedIn">
+              {{ $store.state.auth.user.name }}
             </template>
             <template v-else>
-              "よろしく"
+              "ようこそ"
             </template>
           </v-list-item-title>
         </v-list-item>
@@ -86,9 +86,9 @@
         </div>
       </form>
       <!-- Buttons -->
-      <template v-if="$auth.$state.loggedIn">
+      <template v-if="$store.state.auth.loggedIn">
         <v-toolbar-items class="ml-3">
-          <v-btn text @click="$auth.logout()">
+          <v-btn text @click="$auth.logout();$toast.success('ログアウト')">
               Logout
           </v-btn>
         </v-toolbar-items>
@@ -117,7 +117,6 @@ export default {
     return {
       drawer: false,
       nav_lists: [
-        { name: "Address", icon: "mdi-home-map-marker", link: "/addresses" },
         { name: "Profile", icon: "mdi-square-edit-outline", link: "/profile" },
         { name: "Orders", icon: "storage", link: "/orders" }
       ]

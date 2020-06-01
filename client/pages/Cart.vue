@@ -71,10 +71,9 @@
             dark
             class="mt-10 title font-weight-black d-none d-sm-flex"
             rounded
-            color="yellow darken-3"
+            color="yellow darken-4"
             large
-            nuxt-link
-            to="/payment"
+            @click="validateCart"
           >購入画面に進む</v-btn>
         </v-col>
       </v-row>
@@ -86,6 +85,7 @@
       class="d-flex d-sm-none title"
       style="position:fixed;bottom:0px;"
       nuxt-link to="/payment"
+      color="orange darken-3"
     >購入画面に進む</v-btn>
   </div>
 </template>
@@ -97,6 +97,9 @@ export default {
   computed: {
     ...mapGetters(["getCart",  "getCartTotalPrice"])
   },
+  created() {
+    console.log("//////created")
+  },
   methods: {
     currentQuantity(prodQty, qty) {
       if (prodQty === qty) {
@@ -107,11 +110,17 @@ export default {
     },
     onChangeQuantity(e, product) {
       let quantity = parseInt(e.target.value)
-      console.log(typeof quantity)
       this.$store.commit('changeQuantity', {product, quantity})
     },
     onRemoveProduct(product) {
       this.$store.commit('removeProductFromCart', product)
+    },
+    validateCart() {
+      if (this.$store.state.cartLength === 0) {
+        this.$toast.success('カートが空です');
+      } else {
+        this.$router.push("/payment")
+      }
     }
   }
 };

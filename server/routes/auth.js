@@ -67,4 +67,26 @@ router.post('/auth/login', async (req, res)=>{
   }
 })
 
+//put
+router.put('/auth/user', verifyToken, async(req, res) => {
+  try {
+    let user = await User.findOne({_id: req.decoded._id})
+    if (user.name) user.name   = req.body.name
+    if (user.email) user.email = req.body.email
+
+    await user.save();
+
+    res.json({
+      success: true,
+      user
+    })
+  } catch (err) {
+    console.log(err)
+    res.status(500).json({
+      success: false,
+      message: err.message
+    })
+  }
+})
+
 module.exports = router;

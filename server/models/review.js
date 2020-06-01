@@ -8,6 +8,6 @@ const reviewSchema = new Schema({
   photo: String,
   productID: {type: Schema.Types.ObjectId, ref: "Product"},
   user: {type: Schema.Types.ObjectId, ref: "User"}
-})
+},{timestamps : true})
 
 module.exports = mongoose.model('Review', reviewSchema)

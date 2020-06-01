@@ -19,14 +19,18 @@ router.post('/payment',verifyToken,(req, res) => {
     }).then(async charge => {
       const order = new Order()
       order.arrivalDate = req.body.arrivalDate;
+      order.orderDate = req.body.orderDate;
+      order.receiver = req.decoded._id;
+      order.totalPrice = totalPrice
       req.body.cart.map(product => {
         order.products.push({
           productID: product._id,
-          price: product.price,
           quantity: product.quantity
         })
       })
 
+      await order.save()
+      console.log(order)
       res.json({
         success: true,
         message: "おk"
