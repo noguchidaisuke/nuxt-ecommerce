@@ -16,6 +16,9 @@ mongoose.connect(process.env.DATABASE,{useNewUrlParser: true, useUnifiedTopology
 // app
 const app = express();
 
+app.get('/', (req, res) => {
+  res.send("Hello World")
+})
 // middleware
 app.use(morgan('dev'))
 app.use(express.json());

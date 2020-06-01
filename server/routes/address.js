@@ -18,8 +18,8 @@ router.post('/addresses',verifyToken, async (req, res) => {
     address.name = req.body.name
 
     await address.save()
-
     await User.update({_id: req.decoded._id}, {$set: {address: address}})
+
     res.json({
       success: true,
       message: "Success Address register"
@@ -36,9 +36,11 @@ router.post('/addresses',verifyToken, async (req, res) => {
 router.get('/addresses', verifyToken, async (req, res)=>{
   try {
     const user = await User.findOne({_id: req.decoded._id}).populate('address');
+    const newAddress = new Address();
+    const address = user.address ? user.address : newAddress
     res.json({
       success: true,
-      address: user.address
+      address: address
     })
   } catch (err) {
     res.status(500).json({

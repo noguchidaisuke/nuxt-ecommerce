@@ -103,6 +103,7 @@ export default {
   },
   async asyncData({$axios}) {
     const response = await $axios.$get('/api/addresses')
+    console.log(response)
     return {
       address: response.address
     }

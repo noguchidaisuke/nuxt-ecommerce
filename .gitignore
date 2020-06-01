@@ -1,2 +1,5 @@
 server/node_modules
 server/.env
+server/now.json
+client/.nuxt
+client/node_modules

@@ -1,6 +1,7 @@
 import colors from 'vuetify/es5/util/colors'
 
-const URL = 'http://localhost:4000'
+const URL = process.env.NODE_ENV !== 'production' ? 'http://localhost:4000' : "https://server-89jy2g3yo.now.sh"
+
 export default {
   mode: 'universal',
   /*
@@ -17,7 +18,8 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'stylesheet', type: 'image/x-icon', href: 'https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css' }
+      { rel: 'stylesheet', type: 'image/x-icon', href: 'https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css' },
+      { rel: 'stylesheet',  href: 'https://fonts.googleapis.com/icon?family=Material+Icons' }
     ]
   },
   /*
@@ -44,7 +46,7 @@ export default {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
-    'nuxt-material-design-icons',
+    // 'nuxt-material-design-icons',
     '@nuxtjs/auth',
     '@nuxtjs/toast'
   ],

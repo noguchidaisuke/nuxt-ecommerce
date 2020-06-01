@@ -13,15 +13,12 @@
   "dependencies": {
     "@nuxtjs/auth": "^4.9.1",
     "@nuxtjs/axios": "^5.3.6",
+    "@nuxtjs/now-builder": "^0.17.2",
     "@nuxtjs/pwa": "^3.0.0-0",
     "@nuxtjs/toast": "^3.3.0",
+    "@nuxtjs/vuetify": "^1.11.2",
     "moment": "^2.26.0",
     "nuxt": "^2.0.0",
-    "nuxt-material-design-icons": "^1.0.4",
-    "vue-star-rating": "^1.6.1",
     "vuex-persistedstate": "^3.0.1"
-  },
-  "devDependencies": {
-    "@nuxtjs/vuetify": "^1.0.0"
   }
 }

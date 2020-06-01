@@ -43,7 +43,7 @@
       <v-row justify="center">
         <v-col cols="12" sm="8">
           <v-btn outlined small nuxt-link :to="`/reviews/${product._id}`" class="mb-5 mt-10" >新規レビューを投稿する</v-btn>
-            <Review :reviews="reviews"/>
+          <Review :reviews="reviews"/>
         </v-col>
       </v-row>
     </v-container>
