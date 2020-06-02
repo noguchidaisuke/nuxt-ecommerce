@@ -44,4 +44,5 @@ app.use('/api', addressRoute)
 app.use('/api', paymentRoute)
 app.use('/api', orderRoute)
 
-app.listen(4000)
+module.exports = app
+// app.listen(4000)
