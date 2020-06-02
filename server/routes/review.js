@@ -39,7 +39,7 @@ router.post('/reviews/:id', [upload.single("photo"), verifyToken], async (req, r
 
 router.get('/reviews/:id', async (req, res) => {
   try {
-    let reviews = await Review.find({productID: req.params.id}).populate('user', 'name')
+    let reviews = await Review.find({productID: req.params.id}).populate('user', 'name').sort({"createdAt": -1})
 
     res.json({
       success: true,

@@ -1,7 +1,8 @@
-const express = require('express')
-const morgan = require('morgan')
+const express  = require('express')
+const morgan   = require('morgan')
 const mongoose = require('mongoose')
-const cors = require('cors')
+const cors     = require('cors')
+const serverlessExpress = require('aws-serverless-express/middleware')
 
 require('dotenv').config()
 
@@ -24,6 +25,7 @@ app.use(morgan('dev'))
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(cors())
+app.use(serverlessExpress.eventContext())
 
 // router
 const userRoute     = require('./routes/auth')

@@ -62,6 +62,11 @@ export default {
       let promiseReviews =  $axios.$get(`/api/reviews/${params.id}`)
 
       let [resProduct, resReviews] = await Promise.all([promiseProduct, promiseReviews])
+      resReviews.reviews.sort((a,b) => {
+        a["createdAt"] < b["createdAt"] ? 1 : -1
+      })
+      console.log("after sort/////",resReviews.reviews)
+
       return {
         product: resProduct.product,
         reviews: resReviews.reviews

@@ -1,6 +1,6 @@
 import colors from 'vuetify/es5/util/colors'
 
-const URL = process.env.NODE_ENV !== 'production' ? 'http://localhost:4000' : "https://server-qp0re2vgz.now.sh"
+const URL = process.env.NODE_ENV !== 'production' ? 'http://localhost:4000' : "https://server-d7ck9haqo.now.sh/"
 
 export default {
   mode: 'universal',

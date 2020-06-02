@@ -1,6 +1,18 @@
 <template>
   <div class="main">
     <v-container>
+      <v-row >
+        <v-col cols="12">
+          <v-btn small outlined @click="sortByAsc('price')">
+            <v-icon small left>trending_down</v-icon>
+            <span class="caption text-lowercase">安い順</span>
+          </v-btn>
+          <v-btn small outlined @click="sortByDesc('price')">
+            <v-icon small left>trending_up</v-icon>
+            <span class="caption text-lowercase">高い順</span>
+          </v-btn>
+        </v-col>
+      </v-row>
       <v-row>
         <v-col cols="12" sm="4" lg="3" v-for="product in products" :key="product.title">
           <v-card nuxt-link :to="`/products/${product._id}`">
@@ -24,6 +36,18 @@ export default {
       }
     } catch (err) {
       console.log(err)
+    }
+  },
+  methods: {
+    sortByAsc(prop) {
+      this.products.sort((a, b) => {
+        return a[prop] < b[prop] ? -1 : 1
+      })
+    },
+    sortByDesc(prop) {
+      this.products.sort((a, b) => {
+        return a[prop] < b[prop] ? 1 : -1
+      })
     }
   }
 }
