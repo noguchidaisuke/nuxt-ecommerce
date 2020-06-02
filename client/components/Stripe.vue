@@ -50,6 +50,7 @@ export default {
           orderDate: moment().format("YYYY-MM-DD")
         });
         if (response.success) {
+          this.$toast.success('決済完了 orderページからご確認ください');
           this.$store.commit('clearCart')
           this.$router.push('/')
         }
