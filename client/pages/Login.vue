@@ -44,6 +44,7 @@ export default {
             password: this.password
           }
         });
+        await this.$auth.fetchUser()
         this.$toast.success('ログイン完了');
         this.$router.push('/');
       } catch (err) {

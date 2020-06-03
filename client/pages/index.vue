@@ -1,8 +1,8 @@
 <template>
   <div class="main">
     <v-container>
-      <v-row >
-        <v-col cols="12">
+      <v-row justify="space-between" align="center" class="mt-n4">
+        <v-col cols="6">
           <v-btn small outlined @click="sortByAsc('price')">
             <v-icon small left>trending_down</v-icon>
             <span class="caption text-lowercase">安い順</span>
@@ -12,9 +12,13 @@
             <span class="caption text-lowercase">高い順</span>
           </v-btn>
         </v-col>
+        <v-col cols="4">
+          <v-text-field label="検索"  prepend-inner-icon="search" v-model="search">
+          </v-text-field>
+        </v-col>
       </v-row>
       <v-row>
-        <v-col cols="12" sm="4" lg="3" v-for="product in products" :key="product.title">
+        <v-col cols="12" sm="4" lg="3" v-for="product in filteredProduct" :key="product.title">
           <v-card nuxt-link :to="`/products/${product._id}`">
             <v-img :src="product.photos[0]" aspect-ratio="1" class="img-fluid"></v-img>
             <v-card-subtitle>¥{{product.price}}</v-card-subtitle>
@@ -36,6 +40,18 @@ export default {
       }
     } catch (err) {
       console.log(err)
+    }
+  },
+  data() {
+    return {
+      search: ""
+    }
+  },
+  computed: {
+    filteredProduct() {
+      return this.products.filter(product => {
+        return product.title.toLowerCase().match(this.search.toLowerCase())
+      })
     }
   },
   methods: {

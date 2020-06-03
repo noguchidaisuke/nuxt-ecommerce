@@ -1,18 +1,18 @@
 <template>
   <v-app>
     <v-container>
-      <v-row>
+      <v-row >
         <!-- main -->
         <v-col cols="12">
           <v-row justify="center">
-            <v-col cols="12" sm="8">
+            <v-col cols="12" sm="7" md="8">
               <v-row>
                 <v-col cols="6" sm="6" v-for="image in product.photos" :key="image">
-                  <v-img :src="image" class="img-fluid" aspect-ratio="1"></v-img>
+                  <v-img :src="image" class="img-fluid" ></v-img>
                 </v-col>
               </v-row>
             </v-col>
-            <v-col cols="12" sm="4" >
+            <v-col cols="12" sm="5" md="4">
               <v-card flat>
                 <v-card-subtitle>
                   {{　product.category ? product.category.type : "カテゴリー"　}}
@@ -32,18 +32,11 @@
                 <v-card-subtitle class="mt-8">アイテム詳細</v-card-subtitle>
                 <v-card-text class="black--text">{{product.description}}</v-card-text>
               </v-card>
-              <v-divider class="mt-5"></v-divider>
+              <v-divider class="my-7"></v-divider>
+              <v-btn dark small nuxt-link :to="`/reviews/${product._id}`" class="mb-7 mt-12">新規レビューを投稿する</v-btn>
+              <Review :reviews="reviews"/>
             </v-col>
           </v-row>
-        </v-col>
-      </v-row>
-    </v-container>
-    <v-divider></v-divider>
-    <v-container>
-      <v-row justify="center">
-        <v-col cols="12" sm="8">
-          <v-btn outlined small nuxt-link :to="`/reviews/${product._id}`" class="mb-5 mt-10" >新規レビューを投稿する</v-btn>
-          <Review :reviews="reviews"/>
         </v-col>
       </v-row>
     </v-container>

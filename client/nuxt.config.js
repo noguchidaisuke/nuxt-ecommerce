@@ -1,6 +1,6 @@
 import colors from 'vuetify/es5/util/colors'
 
-const URL = process.env.NODE_ENV !== 'production' ? 'http://localhost:4000' : "https://server-d7ck9haqo.now.sh/"
+const URL = process.env.NODE_ENV !== 'production' ? 'http://localhost:4000' : "https://piltan0xng.execute-api.ap-northeast-1.amazonaws.com/prod"
 
 export default {
   mode: 'universal',
@@ -58,17 +58,23 @@ export default {
     baseURL: URL
   },
 
-
   auth: {
     strategies: {
       local: {
         endpoints: {
           login: {
+            url: '/api/auth/login',
+            method: 'post',
             propertyName: "token"
+          },
+          logout: false,
+          user: {
+            method: 'get',
+            url: '/api/auth/user',
+            propertyName: 'user' // <--- Default "user"
           }
         }
       },
-      logout: false
     }
   },
 

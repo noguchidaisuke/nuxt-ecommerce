@@ -1,11 +1,15 @@
 const express  = require('express')
-const morgan   = require('morgan')
-const mongoose = require('mongoose')
-const cors     = require('cors')
+const morgan            = require('morgan')
+const mongoose          = require('mongoose')
+const cors              = require('cors')
 const serverlessExpress = require('aws-serverless-express/middleware')
-
 require('dotenv').config()
 
+const isProd = () => {
+  return !!process.env.AWS_REGION
+}
+
+console.log(process.env.AWS_REGION)
 mongoose.connect(process.env.DATABASE,{useNewUrlParser: true, useUnifiedTopology: true},err => {
   if (err) {
     console.log(err)
@@ -25,7 +29,6 @@ app.use(morgan('dev'))
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(cors())
-app.use(serverlessExpress.eventContext())
 
 // router
 const userRoute     = require('./routes/auth')
@@ -34,7 +37,7 @@ const categoryRoute = require('./routes/category')
 const reviewRoute   = require('./routes/review')
 const addressRoute  = require('./routes/address')
 const paymentRoute  = require('./routes/payment')
-const orderRoute  = require('./routes/order')
+const orderRoute    = require('./routes/order')
 
 app.use('/api', userRoute)
 app.use('/api', productRoute)
@@ -44,5 +47,9 @@ app.use('/api', addressRoute)
 app.use('/api', paymentRoute)
 app.use('/api', orderRoute)
 
-module.exports = app
-// app.listen(4000)
+if (isProd()) {
+  app.use(serverlessExpress.eventContext())
+  module.exports = app;
+} else {
+  app.listen(4000)
+}

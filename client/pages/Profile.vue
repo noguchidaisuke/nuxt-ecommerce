@@ -17,12 +17,6 @@
                 prepend-icon="email"
                 v-model="email"
               ></v-text-field>
-
-              <v-text-field
-                label="Password"
-                prepend-icon="vpn_key"
-                v-model="password"
-              ></v-text-field>
             </v-form>
           </v-card-text>
           <v-btn class="mb-8" large dark @click="onEditUser">変更</v-btn>
@@ -34,12 +28,11 @@
 
 <script>
 export default {
-  middleware: 'auth',
+  middleware: 'authenticated',
   data() {
     return {
-      name: this.$auth.user.name,
-      email: this.$auth.user.email,
-      password: "password"
+      name: this.$store.state.auth.user.name,
+      email: this.$store.state.auth.user.email
     }
   },
   methods: {

@@ -1,8 +1,8 @@
 <template>
   <div class="review">
-    <v-card flat class="mb-5 pa-3 grey lighten-5" v-for="review in reviews" :key="review._id">
+    <v-card flat class="pa-1" v-for="review in reviews" :key="review._id">
       <div>
-        <v-avatar color="indigo" class="mr-4" size="30px">
+        <v-avatar color="indigo" class="mr-2" size="25px">
           <v-icon dark>mdi-account-circle</v-icon>
         </v-avatar>
         <span>{{review.user.name}}</span>
@@ -31,11 +31,6 @@
 
 <script>
 export default {
-  props: ["reviews"],
-  data() {
-    return {
-      rating: 4.5,
-    };
-  }
+  props: ["reviews"]
 };
 </script>

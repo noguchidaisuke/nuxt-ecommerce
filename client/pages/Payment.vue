@@ -97,7 +97,7 @@ import moment from 'moment'
 import Stripe from '@/components/Stripe'
 import {mapGetters} from 'vuex'
 export default {
-  middleware: 'auth',
+  middleware: 'authenticated',
   components: {
     Stripe,
   },

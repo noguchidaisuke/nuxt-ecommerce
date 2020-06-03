@@ -44,7 +44,7 @@
 
 <script>
 export default {
-  middleware: 'auth',
+  middleware: 'authenticated',
   async asyncData({$axios, params}) {
     let response = await $axios.$get(`/api/products/${params.id}`)
     return { product: response.product }
