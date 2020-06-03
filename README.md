@@ -1,6 +1,17 @@
-# my-ec
+# NUXTEC
 
-> My majestic Nuxt.js project
+> https://nuxt-client-ohd7fxhn1.now.sh/
+
+# description
+
+> 簡単なECサイト
+> UI + APIで１週間
+> セキュリティ + デプロイ + デバックで３日前後
+
+# tech
+> Backend: Express
+> Frontend: Nuxt SSR
+> Deploy: backend => lambda / frontend => now
 
 ## Build Setup
 

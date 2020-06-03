@@ -27,7 +27,7 @@
                 </v-card-text>
                 <template>
                   <v-btn block dark large rounded class="mt-8" @click="addCart">カートに追加</v-btn>
-                  <v-btn block  large rounded outlined class="mt-3" @click="checkOut">購入画面に進む</v-btn>
+                  <v-btn block  large rounded outlined class="mt-3" @click="checkOut">すぐに購入</v-btn>
                 </template>
                 <v-card-subtitle class="mt-8">アイテム詳細</v-card-subtitle>
                 <v-card-text class="black--text">{{product.description}}</v-card-text>
