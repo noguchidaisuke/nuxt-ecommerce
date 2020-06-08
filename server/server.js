@@ -3,6 +3,7 @@ const morgan            = require('morgan')
 const mongoose          = require('mongoose')
 const cors              = require('cors')
 const serverlessExpress = require('aws-serverless-express/middleware')
+// const cookieParser      = require('cookie-parser')
 require('dotenv').config()
 
 const isProd = () => {
@@ -29,6 +30,7 @@ app.use(morgan('dev'))
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(cors())
+// app.use(cookieParser())
 
 // router
 const userRoute     = require('./routes/auth')

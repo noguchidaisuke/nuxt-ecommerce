@@ -33,7 +33,8 @@ export default {
   ],
 
   plugins: [
-    { src: "~/plugins/localStorage.js", ssr: false}
+    { src: "~/plugins/localStorage.js", mode: 'client'},
+    { src: "~/plugins/cookies.js", mode: 'client'}
   ],
   /*
   ** Nuxt.js dev-modules
@@ -59,6 +60,7 @@ export default {
   },
 
   auth: {
+    cookie:false,
     strategies: {
       local: {
         endpoints: {

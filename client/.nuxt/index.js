@@ -18,6 +18,7 @@ import nuxt_plugin_plugin_2fb498dc from 'nuxt_plugin_plugin_2fb498dc' // Source:
 import nuxt_plugin_toast_432b3f17 from 'nuxt_plugin_toast_432b3f17' // Source: ./toast.js (mode: 'client')
 import nuxt_plugin_axios_76faf268 from 'nuxt_plugin_axios_76faf268' // Source: ./axios.js (mode: 'all')
 import nuxt_plugin_localStorage_830ec59e from 'nuxt_plugin_localStorage_830ec59e' // Source: ../plugins/localStorage.js (mode: 'client')
+import nuxt_plugin_cookies_2c3cf8fe from 'nuxt_plugin_cookies_2c3cf8fe' // Source: ../plugins/cookies.js (mode: 'client')
 import nuxt_plugin_plugin_9d66dcb8 from 'nuxt_plugin_plugin_9d66dcb8' // Source: ./auth/plugin.js (mode: 'all')
 
 // Component: <ClientOnly>
@@ -202,6 +203,10 @@ async function createApp (ssrContext) {
 
   if (process.client && typeof nuxt_plugin_localStorage_830ec59e === 'function') {
     await nuxt_plugin_localStorage_830ec59e(app.context, inject)
+  }
+
+  if (process.client && typeof nuxt_plugin_cookies_2c3cf8fe === 'function') {
+    await nuxt_plugin_cookies_2c3cf8fe(app.context, inject)
   }
 
   if (typeof nuxt_plugin_plugin_9d66dcb8 === 'function') {

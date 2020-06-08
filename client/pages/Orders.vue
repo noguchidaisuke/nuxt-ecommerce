@@ -55,9 +55,9 @@
 
 <script>
 export default {
+  middleware: 'authenticated',
   async asyncData({$axios}) {
     const response = await $axios.$get('/api/orders');
-    console.log(response.orders[0].products)
     return {
       orders: response.orders
     }
