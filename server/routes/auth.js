@@ -4,6 +4,8 @@ const User        = require('../models/user')
 const jwt         = require('jsonwebtoken')
 const verifyToken = require('../middlewares/verifyToken')
 const bcrypt      = require('bcryptjs')
+const dev_cookie_option = {maxAge: 60*60*24*7, httpOnly: true }
+const pro_cookie_option = {...dev_cookie_option,  sameSite: 'None', secure: true}
 
 // find one user
 router.get('/auth/user', verifyToken, async (req, res) => {
@@ -55,6 +57,14 @@ router.post('/auth/login', async (req, res)=>{
 
     if (bcrypt.compareSync(req.body.password, findUser.password)) {
       let token = jwt.sign(findUser.toJSON(), process.env.SECRET, { expiresIn: 604800 })
+      const cookie_option =
+        req.headers.origin === 'http://localhost:9000' ? dev_cookie_option : pro_cookie_option
+      console.log("cookies ////////");
+      console.log(req.headers);
+      console.log(req.headers.origin === 'http://localhost:9000');
+      console.log(cookie_option);
+      console.log("/////////////");
+      res.cookie('cookie_auth_token', token, cookie_option);
       res.json({success: true, token: token})
     } else {
       res.status(403).json({success: false, message: 'wrong password'})

@@ -51,15 +51,15 @@ export default {
           email: this.email,
           password: this.password
         }
-        const response = await this.$axios.$post('/api/auth/register', data)
-        if (response.success) {
-          await this.$auth.loginWith('local', {
+        const resRegister = await this.$axios.$post('/api/auth/register', data)
+        if (resRegister.success) {
+          const resLogin = await this.$auth.loginWith('local', {
             data: {
               email: this.email,
               password: this.password
             }
           })
-
+          this.$auth.setUserToken(resLogin.data.token)
           this.$toast.success('登録完了しました');
           this.$router.push('/')
         }

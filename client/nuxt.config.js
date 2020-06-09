@@ -33,8 +33,7 @@ export default {
   ],
 
   plugins: [
-    { src: "~/plugins/localStorage.js", mode: 'client'},
-    { src: "~/plugins/cookies.js", mode: 'client'}
+    { src: "~/plugins/localStorage.js", mode: 'client'}
   ],
   /*
   ** Nuxt.js dev-modules
@@ -49,18 +48,21 @@ export default {
     '@nuxtjs/pwa',
     // 'nuxt-material-design-icons',
     '@nuxtjs/auth',
-    '@nuxtjs/toast'
+    '@nuxtjs/toast',
+    'cookie-universal-nuxt'
   ],
   /*
   ** Axios module configuration
   ** See https://axios.nuxtjs.org/options
   */
   axios: {
-    baseURL: URL
+    baseURL: URL,
+    credentials : true
   },
 
   auth: {
     cookie:false,
+    localStorage: false,
     strategies: {
       local: {
         endpoints: {
@@ -75,7 +77,8 @@ export default {
             url: '/api/auth/user',
             propertyName: 'user' // <--- Default "user"
           }
-        }
+        },
+        autoFetchUser:false
       },
     }
   },
@@ -105,7 +108,6 @@ export default {
       }
     }
   },
-
   build: {
     /*
     ** You can extend webpack config here

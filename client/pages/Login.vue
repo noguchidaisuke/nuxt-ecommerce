@@ -39,12 +39,12 @@ export default {
   methods: {
     async onLogin() {
       try {
-        await this.$auth.loginWith('local', {data: {
+        const response = await this.$auth.loginWith('local', {data: {
             email: this.email,
             password: this.password
           }
         });
-        await this.$auth.fetchUser()
+        this.$auth.setUserToken(response.data.token)
         this.$toast.success('ログイン完了');
         this.$router.push('/');
       } catch (err) {
@@ -54,7 +54,3 @@ export default {
   }
 }
 </script>
-
-<style>
-
-</style>

@@ -3,14 +3,13 @@ const morgan            = require('morgan')
 const mongoose          = require('mongoose')
 const cors              = require('cors')
 const serverlessExpress = require('aws-serverless-express/middleware')
-// const cookieParser      = require('cookie-parser')
+const cookieParser      = require('cookie-parser')
 require('dotenv').config()
 
 const isProd = () => {
   return !!process.env.AWS_REGION
 }
 
-console.log(process.env.AWS_REGION)
 mongoose.connect(process.env.DATABASE,{useNewUrlParser: true, useUnifiedTopology: true},err => {
   if (err) {
     console.log(err)
@@ -25,12 +24,13 @@ const app = express();
 app.get('/', (req, res) => {
   res.send("Hello World")
 })
+
 // middleware
 app.use(morgan('dev'))
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
-app.use(cors())
-// app.use(cookieParser())
+app.use(cors({credentials: true, origin: true}))
+app.use(cookieParser('dsafaasfaf'))
 
 // router
 const userRoute     = require('./routes/auth')
@@ -48,6 +48,11 @@ app.use('/api', reviewRoute)
 app.use('/api', addressRoute)
 app.use('/api', paymentRoute)
 app.use('/api', orderRoute)
+
+app.get('/api/cookies', (req, res) => {
+  res.cookie('test', "xxx", {maxAge:60000, httpOnly:true});
+  res.json("success!")
+})
 
 if (isProd()) {
   app.use(serverlessExpress.eventContext())

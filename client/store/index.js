@@ -15,6 +15,9 @@ export const actions = {
     }
 
     commit('incrementCartLength')
+  },
+  nuxtServerInit({dispath}, {req}) {
+    
   }
 }
 
