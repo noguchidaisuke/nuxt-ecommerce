@@ -6,11 +6,11 @@ const serverlessExpress = require('aws-serverless-express/middleware')
 const cookieParser      = require('cookie-parser')
 require('dotenv').config()
 
-const isProd = () => {
-  return !!process.env.AWS_REGION
-}
+// const isProd = () => {
+//   return !!process.env.AWS_REGION
+// }
 
-mongoose.connect(process.env.DATABASE,{useNewUrlParser: true, useUnifiedTopology: true},err => {
+mongoose.connect(process.env.DATABASE,{ useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, },err => {
   if (err) {
     console.log(err)
   } else {
@@ -50,13 +50,14 @@ app.use('/api', paymentRoute)
 app.use('/api', orderRoute)
 
 app.get('/api/cookies', (req, res) => {
-  res.cookie('test', "xxx", {maxAge:60000, httpOnly:true});
+  res.cookie('test', "xxx", {maxAge:60000, httpOnly:true });
   res.json("success!")
 })
 
-if (isProd()) {
-  app.use(serverlessExpress.eventContext())
-  module.exports = app;
-} else {
-  app.listen(4000)
-}
+// if (isProd()) {
+//   app.use(serverlessExpress.eventContext())
+//   module.exports = app;
+// } else {
+//   app.listen(4000)
+// }
+app.listen(4000)

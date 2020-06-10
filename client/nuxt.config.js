@@ -1,6 +1,7 @@
 import colors from 'vuetify/es5/util/colors'
 
-const URL = process.env.NODE_ENV !== 'production' ? 'http://localhost:4000' : "https://piltan0xng.execute-api.ap-northeast-1.amazonaws.com/prod"
+// const URL = process.env.NODE_ENV !== 'production' ? 'http://localhost:4000' : "https://piltan0xng.execute-api.ap-northeast-1.amazonaws.com/prod"
+const URL = process.env.NODE_ENV !== 'production' ? 'http://localhost:4000' : "https://server-liqsrocol.now.sh/"
 
 export default {
   mode: 'universal',
