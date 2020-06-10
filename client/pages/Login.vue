@@ -44,7 +44,8 @@ export default {
             password: this.password
           }
         });
-        this.$auth.setUserToken(response.data.token)
+        
+        this.$auth.setUser(response.data.authUser)
         this.$toast.success('ログイン完了');
         this.$router.push('/');
       } catch (err) {

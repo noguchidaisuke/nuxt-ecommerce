@@ -11,7 +11,6 @@
             <v-icon small left>trending_up</v-icon>
             <span class="caption text-lowercase">高い順</span>
           </v-btn>
-          <v-btn dark @click="setCookie">set cookie</v-btn>
         </v-col>
         <v-col cols="4">
           <v-text-field label="検索"  prepend-inner-icon="search" v-model="search">
@@ -65,14 +64,6 @@ export default {
       this.products.sort((a, b) => {
         return a[prop] < b[prop] ? 1 : -1
       })
-    },
-    setCookie() {
-      this.$axios.$get('/api/cookies')
-        .then(res => {
-          console.log(res);
-        }).catch(err => {
-          console.log(err);
-        });
     }
   }
 }

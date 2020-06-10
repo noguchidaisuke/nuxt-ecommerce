@@ -56,7 +56,11 @@
 <script>
 export default {
   middleware: 'authenticated',
-  async asyncData({$axios}) {
+  async asyncData({$axios, req}) {
+    if (process.server) {
+      $axios.setHeader('cookie', req.headers.cookie)
+    }
+
     const response = await $axios.$get('/api/orders');
     return {
       orders: response.orders
