@@ -15,7 +15,15 @@ export const actions = {
     }
 
     commit('incrementCartLength')
-  }
+  },
+  // nuxtServerInit(_, { req, store }) {
+  //   console.log(req.headers);
+  //   console.log(store.$auth);
+  //   if (store.state.auth.loggedIn && !req.headers.cookie) {
+  //     auth.logout
+  //   }
+  //   console.log("nuxtServerInit////////",req.headers);
+  // }
 }
 
 export const mutations = {
