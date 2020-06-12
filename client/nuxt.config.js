@@ -32,7 +32,8 @@ export default {
   ],
 
   plugins: [
-    { src: "~/plugins/localStorage.js", mode: 'client'}
+    { src: "~/plugins/localStorage.js", mode: 'client'},
+    { src: "~/plugins/day.js"}
   ],
   /*
   ** Nuxt.js dev-modules
@@ -82,6 +83,7 @@ export default {
     /*
     ** You can extend webpack config here
     */
+    analyze:true,
     extend (config, ctx) {
     }
   }

@@ -23,7 +23,7 @@ export const actions = {
     commit('incrementCartLength')
   },
 
-  async nuxtServerInit({commit, dispatch}) {
+  async nuxtServerInit({dispatch}) {
     await dispatch('auth/fetchUser').catch(_ => console.log("Not Authorized!"))
   }
 }
