@@ -18,8 +18,6 @@ export default {
       { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'stylesheet', type: 'image/x-icon', href: 'https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css' },
       { rel: 'stylesheet',  href: 'https://fonts.googleapis.com/icon?family=Material+Icons' }
     ]
   },
@@ -51,38 +49,10 @@ export default {
     '@nuxtjs/toast',
     'cookie-universal-nuxt'
   ],
-  /*
-  ** Axios module configuration
-  ** See https://axios.nuxtjs.org/options
-  */
   axios: {
     baseURL: URL,
     credentials : true
   },
-
-  // auth: {
-  //   cookie:false,
-  //   localStorage: false,
-  //   strategies: {
-  //     local: {
-  //       endpoints: {
-  //         login: {
-  //           url: '/api/auth/login',
-  //           method: 'post',
-  //           propertyName: "token"
-  //         },
-  //         logout: false,
-  //         user: {
-  //           method: 'get',
-  //           url: '/api/auth/user',
-  //           propertyName: 'user' // <--- Default "user"
-  //         }
-  //       },
-  //       autoFetchUser:false
-  //     },
-  //   }
-  // },
-
   toast: {
     // 右上にtoastを表示
     position: 'top-right',
