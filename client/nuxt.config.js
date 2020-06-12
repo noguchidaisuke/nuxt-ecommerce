@@ -18,7 +18,6 @@ export default {
       { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
     ],
     link: [
-      { rel: 'stylesheet',  href: 'https://fonts.googleapis.com/icon?family=Material+Icons' }
     ]
   },
   /*
@@ -29,6 +28,7 @@ export default {
   ** Global CSS
   */
   css: [
+    '@/assets/css/iconfont/material-icons.css'
   ],
 
   plugins: [
