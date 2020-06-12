@@ -4,7 +4,6 @@ export const state = () => ({
   cartLength: 0
 })
 
-
 export const actions = {
   addToCart({state, commit}, product) {
     const cartProduct = state.cart.find(prod => prod._id === product._id)
@@ -13,17 +12,20 @@ export const actions = {
     } else {
       commit('incrementQuantity',cartProduct)
     }
-
     commit('incrementCartLength')
   },
-  // nuxtServerInit(_, { req, store }) {
-  //   console.log(req.headers);
-  //   console.log(store.$auth);
-  //   if (store.state.auth.loggedIn && !req.headers.cookie) {
-  //     auth.logout
-  //   }
-  //   console.log("nuxtServerInit////////",req.headers);
-  // }
+
+  buyNow({state, commit}, product) {
+    const cartProduct = state.cart.find(prod => prod._id === product._id)
+    if(!cartProduct) {
+      commit('pushToCart', product)
+    }
+    commit('incrementCartLength')
+  },
+
+  async nuxtServerInit({commit, dispatch}) {
+    await dispatch('auth/fetchUser').catch(_ => console.log("Not Authorized!"))
+  }
 }
 
 export const mutations = {

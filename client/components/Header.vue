@@ -6,10 +6,10 @@
         <v-list-item>
           <v-list-item-title class="title grey--text text--darken-2" dark color="primary">
             <v-list-item-icon>
-              <v-icon>mdi-account-circle</v-icon>
+              <v-icon>account_circle</v-icon>
             </v-list-item-icon>
-            <template v-if="$store.state.auth.loggedIn">
-              {{ $store.state.auth.user.name }}
+            <template v-if="loggedIn">
+              {{ currentUser.name }}
             </template>
             <template v-else>
               "ようこそ"
@@ -20,8 +20,8 @@
         <v-list dense nav>
           <v-list-item nuxt-link to="/cart">
             <v-list-item-icon>
-              <v-badge color="green" :content="$store.state.cartLength">
-                <v-icon>mdi-cart-outline</v-icon>
+              <v-badge color="green" :content="cartLength">
+                <v-icon>shopping_cart</v-icon>
               </v-badge>
             </v-list-item-icon>
             <v-list-item-content>
@@ -53,7 +53,7 @@
       <!-- serch form -->
 
       <!-- Buttons -->
-      <template v-if="$store.state.auth.loggedIn">
+      <template v-if="loggedIn">
         <v-toolbar-items class="ml-3">
           <v-btn text @click="onLogout">
               Logout
@@ -79,20 +79,32 @@
   </div>
 </template>
 <script>
+import { mapGetters } from 'vuex'
 export default {
   data() {
     return {
       drawer: false,
       nav_lists: [
-        { name: "Profile", icon: "mdi-square-edit-outline", link: "/profile" },
+        { name: "Profile", icon: "create", link: "/profile" },
         { name: "Orders", icon: "storage", link: "/orders" }
       ]
     };
   },
+  computed: {
+    ...mapGetters({
+      currentUser: 'auth/getCurrentUser',
+      cartLength: 'getCartLength',
+      loggedIn: 'auth/loggedIn'
+    })
+  },
   methods: {
     onLogout() {
-      this.$auth.logout();
-      this.$toast.success('ログアウト');
+      this.$store.dispatch('auth/logout')
+        .then(_ => {
+          this.$toast.success('ログアウトしました');
+        }).catch(err => {
+          this.$toast.error(err);
+        });
     }
   }
 };

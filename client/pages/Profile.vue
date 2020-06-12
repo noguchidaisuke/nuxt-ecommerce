@@ -9,13 +9,13 @@
               <v-text-field
                 label="Name"
                 prepend-icon="person"
-                v-model="name"
+                v-model="form.name"
               ></v-text-field>
 
               <v-text-field
                 label="Email"
                 prepend-icon="email"
-                v-model="email"
+                v-model="form.email"
               ></v-text-field>
             </v-form>
           </v-card-text>
@@ -31,19 +31,23 @@ export default {
   middleware: 'authenticated',
   data() {
     return {
-      name: this.$store.state.auth.user.name,
-      email: this.$store.state.auth.user.email
+      form: {
+        name: this.$store.getters['auth/getCurrentUser'].name,
+        email: this.$store.getters['auth/getCurrentUser'].email
+      }
     }
   },
   methods: {
-    async onEditUser() {
-      const data = {
-        name: this.name,
-        email: this.email
-      }
-      const response = await this.$axios.$put('/api/auth/user',data)
-      await this.$auth.setUser(response.user)
-      this.$router.replace('/');
+    onEditUser() {
+      this.$axios.$put('/api/auth/user',this.form)
+        .then(user => {
+          this.$store.commit('auth/setUser', user);
+          this.$toastr.success('編集しました');
+          this.$router.push('/');
+        }).catch(err => {
+          this.$toastr.error('編集に失敗しました')
+          console.log(err);
+        });
     }
   }
 }

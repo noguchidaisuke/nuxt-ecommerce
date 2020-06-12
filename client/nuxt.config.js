@@ -48,7 +48,6 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
     // 'nuxt-material-design-icons',
-    '@nuxtjs/auth',
     '@nuxtjs/toast',
     'cookie-universal-nuxt'
   ],
@@ -61,28 +60,28 @@ export default {
     credentials : true
   },
 
-  auth: {
-    cookie:false,
-    localStorage: false,
-    strategies: {
-      local: {
-        endpoints: {
-          login: {
-            url: '/api/auth/login',
-            method: 'post',
-            propertyName: "token"
-          },
-          logout: false,
-          user: {
-            method: 'get',
-            url: '/api/auth/user',
-            propertyName: 'user' // <--- Default "user"
-          }
-        },
-        autoFetchUser:false
-      },
-    }
-  },
+  // auth: {
+  //   cookie:false,
+  //   localStorage: false,
+  //   strategies: {
+  //     local: {
+  //       endpoints: {
+  //         login: {
+  //           url: '/api/auth/login',
+  //           method: 'post',
+  //           propertyName: "token"
+  //         },
+  //         logout: false,
+  //         user: {
+  //           method: 'get',
+  //           url: '/api/auth/user',
+  //           propertyName: 'user' // <--- Default "user"
+  //         }
+  //       },
+  //       autoFetchUser:false
+  //     },
+  //   }
+  // },
 
   toast: {
     // 右上にtoastを表示

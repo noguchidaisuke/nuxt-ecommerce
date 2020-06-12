@@ -9,13 +9,13 @@
               <v-text-field
                 label="Email"
                 prepend-icon="email"
-                v-model="email"
+                v-model="form.email"
               ></v-text-field>
 
               <v-text-field
                 label="Password"
                 prepend-icon="vpn_key"
-                v-model="password"
+                v-model="form.password"
               ></v-text-field>
             </v-form>
           </v-card-text>
@@ -28,29 +28,24 @@
 
 <script>
 export default {
-  middleware: 'auth',
-  auth: 'guest',
+  middleware: 'guest',
   data() {
     return {
-      email: "",
-      password: ""
+      form: {
+        email: "",
+        password: ""
+      }
     }
   },
   methods: {
-    async onLogin() {
-      try {
-        const response = await this.$auth.loginWith('local', {data: {
-            email: this.email,
-            password: this.password
-          }
+    onLogin() {
+      this.$store.dispatch('auth/login', this.form)
+        .then(_ => {
+          this.$toast.success('ログイン完了');
+          this.$router.push('/');
+        }).catch(err => {
+          this.$toast.error(err.message);
         });
-        
-        this.$auth.setUser(response.data.authUser)
-        this.$toast.success('ログイン完了');
-        this.$router.push('/');
-      } catch (err) {
-        this.$toast.error(err);
-      }
     }
   }
 }

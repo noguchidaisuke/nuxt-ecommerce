@@ -19,7 +19,6 @@ import nuxt_plugin_cookieuniversalnuxt_10d2c210 from 'nuxt_plugin_cookieuniversa
 import nuxt_plugin_toast_432b3f17 from 'nuxt_plugin_toast_432b3f17' // Source: ./toast.js (mode: 'client')
 import nuxt_plugin_axios_76faf268 from 'nuxt_plugin_axios_76faf268' // Source: ./axios.js (mode: 'all')
 import nuxt_plugin_localStorage_830ec59e from 'nuxt_plugin_localStorage_830ec59e' // Source: ../plugins/localStorage.js (mode: 'client')
-import nuxt_plugin_plugin_9d66dcb8 from 'nuxt_plugin_plugin_9d66dcb8' // Source: ./auth/plugin.js (mode: 'all')
 
 // Component: <ClientOnly>
 Vue.component(ClientOnly.name, ClientOnly)
@@ -207,10 +206,6 @@ async function createApp (ssrContext) {
 
   if (process.client && typeof nuxt_plugin_localStorage_830ec59e === 'function') {
     await nuxt_plugin_localStorage_830ec59e(app.context, inject)
-  }
-
-  if (typeof nuxt_plugin_plugin_9d66dcb8 === 'function') {
-    await nuxt_plugin_plugin_9d66dcb8(app.context, inject)
   }
 
   // If server-side, wait for async component to be resolved first
