@@ -1,7 +1,7 @@
 import colors from 'vuetify/es5/util/colors'
 
 // const URL = process.env.NODE_ENV !== 'production' ? 'http://localhost:4000' : "https://piltan0xng.execute-api.ap-northeast-1.amazonaws.com/prod"
-const URL = process.env.NODE_ENV !== 'production' ? 'http://localhost:4000' : "https://server-1d9ascs9h.now.sh/"
+const URL = process.env.NODE_ENV !== 'production' ? 'http://localhost:4000' : "https://server-mk2ve1dem.vercel.app/"
 
 export default {
   mode: 'universal',
@@ -33,7 +33,8 @@ export default {
 
   plugins: [
     { src: "~/plugins/localStorage.js", mode: 'client'},
-    { src: "~/plugins/day.js"}
+    { src: "~/plugins/day.js"},
+    { src: "~/plugins/axios.js"}
   ],
   /*
   ** Nuxt.js dev-modules
@@ -48,7 +49,8 @@ export default {
     '@nuxtjs/pwa',
     // 'nuxt-material-design-icons',
     '@nuxtjs/toast',
-    'cookie-universal-nuxt'
+    'cookie-universal-nuxt',
+    'csurf'
   ],
   axios: {
     baseURL: URL,
@@ -83,7 +85,6 @@ export default {
     /*
     ** You can extend webpack config here
     */
-    analyze:true,
     extend (config, ctx) {
     }
   }

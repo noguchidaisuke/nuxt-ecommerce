@@ -4,6 +4,7 @@ const mongoose          = require('mongoose')
 const cors              = require('cors')
 const serverlessExpress = require('aws-serverless-express/middleware')
 const cookieParser      = require('cookie-parser')
+const csrf              = require('csurf')
 require('dotenv').config()
 
 // const isProd = () => {
@@ -31,6 +32,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(cors({credentials: true, origin: true}))
 app.use(cookieParser('dsafaasfaf'))
+app.use(csrf({ cookie: true }));
 
 // router
 const userRoute     = require('./routes/auth')
@@ -52,6 +54,14 @@ app.use('/api', orderRoute)
 app.get('/api/cookies', (req, res) => {
   res.cookie('test', "xxx", {maxAge:60000, httpOnly:true });
   res.json("success!")
+})
+
+app.get('/api/csrfToken', (req, res) => {
+  return res.json({ csrfToken: req.csrfToken() });
+})
+
+app.post('/api/example', (req, res) => {
+  return res.json("プロテク")
 })
 
 // if (isProd()) {

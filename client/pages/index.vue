@@ -65,7 +65,7 @@ export default {
       this.products.sort((a, b) => {
         return a[prop] < b[prop] ? 1 : -1
       })
-    },
+    }
   }
 }
 </script>
