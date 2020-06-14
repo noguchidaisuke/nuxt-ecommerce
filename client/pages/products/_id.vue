@@ -45,20 +45,20 @@
 
 <script>
 import Review from '@/components/Review'
+import { mapActions } from 'vuex'
 export default {
   components: {
     Review
   },
   async asyncData({$axios, params}) {
     try {
-      let promiseProduct =  $axios.$get(`/api/products/${params.id}`)
-      let promiseReviews =  $axios.$get(`/api/reviews/${params.id}`)
+      const promiseProduct =  $axios.$get(`/api/products/${params.id}`)
+      const promiseReviews =  $axios.$get(`/api/reviews/${params.id}`)
 
       let [resProduct, resReviews] = await Promise.all([promiseProduct, promiseReviews])
       resReviews.reviews.sort((a,b) => {
         a["createdAt"] < b["createdAt"] ? 1 : -1
       })
-      console.log("after sort/////",resReviews.reviews)
 
       return {
         product: resProduct.product,
@@ -75,12 +75,13 @@ export default {
     }
   },
   methods: {
+    ...mapActions(['addToCart', 'buyNow']),
     addCart() {
-      this.$store.dispatch('addToCart', this.product);
+      this.addToCart(this.product)
       this.$toast.success('カートに追加しました');
     },
     checkOut() {
-      this.$store.dispatch('addToCart', this.product);
+      this.buyNow(this.product)
       this.$router.push('/payment')
     }
   }

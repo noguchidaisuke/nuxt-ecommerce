@@ -11,15 +11,15 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
-    "@nuxtjs/auth": "^4.9.1",
     "@nuxtjs/axios": "^5.3.6",
     "@nuxtjs/now-builder": "^0.17.2",
     "@nuxtjs/pwa": "^3.0.0-0",
     "@nuxtjs/toast": "^3.3.0",
     "@nuxtjs/vuetify": "^1.11.2",
-    "moment": "^2.26.0",
+    "cookie-universal-nuxt": "^2.1.4",
+    "csurf": "^1.11.0",
+    "dayjs": "^1.8.28",
     "nuxt": "^2.0.0",
-    "vue-cookies": "^1.7.0",
     "vuex-persistedstate": "^3.0.1"
   }
 }

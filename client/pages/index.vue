@@ -44,7 +44,8 @@ export default {
   },
   data() {
     return {
-      search: ""
+      search: "",
+      now: this.$dayjs
     }
   },
   computed: {

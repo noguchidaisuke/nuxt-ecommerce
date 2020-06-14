@@ -4,15 +4,14 @@ const User        = require('../models/user')
 const jwt         = require('jsonwebtoken')
 const verifyToken = require('../middlewares/verifyToken')
 const bcrypt      = require('bcryptjs')
+const dev_cookie_option = {maxAge: 1000 * 60 * 60 * 24 * 7, httpOnly: true }
+const pro_cookie_option = {...dev_cookie_option,  sameSite: 'None', secure: true}
 
 // find one user
 router.get('/auth/user', verifyToken, async (req, res) => {
   try {
-    let findUser = await User.findOne({_id: req.decoded._id})
-    res.json({
-      success: true,
-      user: findUser
-    })
+    const user = await User.findOne({_id: req.decoded._id})
+    res.json(user)
   } catch (err) {
     res.status(500).json({
       success: false,
@@ -23,11 +22,11 @@ router.get('/auth/user', verifyToken, async (req, res) => {
 
 // register
 router.post('/auth/register', async (req, res)=>{
-  if(!req.body.email)    res.json({success: false, message: "please enter email"})
-  if(!req.body.password) res.json({success: false, message: "please enter password"})
+  if(!req.body.email)    res.status(401).json({success: false, message: "please enter email"})
+  if(!req.body.password) res.status(401).json({success: false, message: "please enter password"})
 
   try {
-    let newUser = new User();
+    let newUser      = new User();
     newUser.name     = req.body.name;
     newUser.email    = req.body.email;
     newUser.password = req.body.password;
@@ -51,11 +50,16 @@ router.post('/auth/register', async (req, res)=>{
 router.post('/auth/login', async (req, res)=>{
   try {
     let findUser = await User.findOne({email: req.body.email})
-    if (!findUser) res.status(403).json({success: false, message: 'wrong email'})
+    if (!findUser) {
+      return res.status(403).json({success: false, message: 'wrong email'})
+    }
 
     if (bcrypt.compareSync(req.body.password, findUser.password)) {
       let token = jwt.sign(findUser.toJSON(), process.env.SECRET, { expiresIn: 604800 })
-      res.json({success: true, token: token})
+      const cookie_option =
+        req.headers.origin === 'http://localhost:9000' ? dev_cookie_option : pro_cookie_option
+      res.cookie('cookie_auth_token', token, cookie_option);
+      res.json(findUser)
     } else {
       res.status(403).json({success: false, message: 'wrong password'})
     }
@@ -87,6 +91,15 @@ router.put('/auth/user', verifyToken, async(req, res) => {
       message: err.message
     })
   }
+})
+
+// logout
+router.get('/auth/logout', (req, res) => {
+  res.cookie('cookie_auth_token', "")
+  res.json({
+    success: true,
+    message: "ログアウトしました"
+  })
 })
 
 module.exports = router;

@@ -15,11 +15,12 @@ import { createStore } from './store.js'
 import nuxt_plugin_workbox_25d86d84 from 'nuxt_plugin_workbox_25d86d84' // Source: ./workbox.js (mode: 'client')
 import nuxt_plugin_nuxticons_19811040 from 'nuxt_plugin_nuxticons_19811040' // Source: ./nuxt-icons.js (mode: 'all')
 import nuxt_plugin_plugin_2fb498dc from 'nuxt_plugin_plugin_2fb498dc' // Source: ./vuetify/plugin.js (mode: 'all')
+import nuxt_plugin_cookieuniversalnuxt_10d2c210 from 'nuxt_plugin_cookieuniversalnuxt_10d2c210' // Source: ./cookie-universal-nuxt.js (mode: 'all')
 import nuxt_plugin_toast_432b3f17 from 'nuxt_plugin_toast_432b3f17' // Source: ./toast.js (mode: 'client')
 import nuxt_plugin_axios_76faf268 from 'nuxt_plugin_axios_76faf268' // Source: ./axios.js (mode: 'all')
 import nuxt_plugin_localStorage_830ec59e from 'nuxt_plugin_localStorage_830ec59e' // Source: ../plugins/localStorage.js (mode: 'client')
-import nuxt_plugin_cookies_2c3cf8fe from 'nuxt_plugin_cookies_2c3cf8fe' // Source: ../plugins/cookies.js (mode: 'client')
-import nuxt_plugin_plugin_9d66dcb8 from 'nuxt_plugin_plugin_9d66dcb8' // Source: ./auth/plugin.js (mode: 'all')
+import nuxt_plugin_day_6fad285e from 'nuxt_plugin_day_6fad285e' // Source: ../plugins/day.js (mode: 'all')
+import nuxt_plugin_axios_5659d192 from 'nuxt_plugin_axios_5659d192' // Source: ../plugins/axios.js (mode: 'all')
 
 // Component: <ClientOnly>
 Vue.component(ClientOnly.name, ClientOnly)
@@ -66,7 +67,7 @@ async function createApp (ssrContext) {
   // here we inject the router and store to all child components,
   // making them available everywhere as `this.$router` and `this.$store`.
   const app = {
-    head: {"titleTemplate":"%s - my-ec","title":"my-ec","script":[{"src":"https:\u002F\u002Fjs.stripe.com\u002Fv3"}],"meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1"},{"hid":"description","name":"description","content":"My majestic Nuxt.js project"},{"hid":"mobile-web-app-capable","name":"mobile-web-app-capable","content":"yes"},{"hid":"apple-mobile-web-app-title","name":"apple-mobile-web-app-title","content":"my-ec"},{"hid":"author","name":"author","content":"github daisukenoguchi"},{"hid":"theme-color","name":"theme-color","content":"#fff"},{"hid":"og:type","name":"og:type","property":"og:type","content":"website"},{"hid":"og:title","name":"og:title","property":"og:title","content":"my-ec"},{"hid":"og:site_name","name":"og:site_name","property":"og:site_name","content":"my-ec"},{"hid":"og:description","name":"og:description","property":"og:description","content":"My majestic Nuxt.js project"}],"link":[{"rel":"icon","type":"image\u002Fx-icon","href":"\u002Ffavicon.ico"},{"rel":"stylesheet","type":"image\u002Fx-icon","href":"https:\u002F\u002Fcdn.jsdelivr.net\u002Fnpm\u002F@mdi\u002Ffont@4.x\u002Fcss\u002Fmaterialdesignicons.min.css"},{"rel":"stylesheet","href":"https:\u002F\u002Ffonts.googleapis.com\u002Ficon?family=Material+Icons"},{"rel":"stylesheet","type":"text\u002Fcss","href":"https:\u002F\u002Ffonts.googleapis.com\u002Fcss?family=Roboto:100,300,400,500,700,900&display=swap"},{"rel":"stylesheet","type":"text\u002Fcss","href":"https:\u002F\u002Fcdn.jsdelivr.net\u002Fnpm\u002F@mdi\u002Ffont@latest\u002Fcss\u002Fmaterialdesignicons.min.css"},{"rel":"manifest","href":"\u002F_nuxt\u002Fmanifest.52e47a06.json"},{"rel":"shortcut icon","href":"\u002F_nuxt\u002Ficons\u002Ficon_64.5f6a36.png"},{"rel":"apple-touch-icon","href":"\u002F_nuxt\u002Ficons\u002Ficon_512.5f6a36.png","sizes":"512x512"}],"style":[],"htmlAttrs":{"lang":"en"}},
+    head: {"titleTemplate":"%s - my-ec","title":"my-ec","script":[{"src":"https:\u002F\u002Fjs.stripe.com\u002Fv3"}],"meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1"},{"hid":"description","name":"description","content":"My majestic Nuxt.js project"},{"hid":"mobile-web-app-capable","name":"mobile-web-app-capable","content":"yes"},{"hid":"apple-mobile-web-app-title","name":"apple-mobile-web-app-title","content":"my-ec"},{"hid":"author","name":"author","content":"github daisukenoguchi"},{"hid":"theme-color","name":"theme-color","content":"#fff"},{"hid":"og:type","name":"og:type","property":"og:type","content":"website"},{"hid":"og:title","name":"og:title","property":"og:title","content":"my-ec"},{"hid":"og:site_name","name":"og:site_name","property":"og:site_name","content":"my-ec"},{"hid":"og:description","name":"og:description","property":"og:description","content":"My majestic Nuxt.js project"}],"link":[{"rel":"stylesheet","type":"text\u002Fcss","href":"https:\u002F\u002Ffonts.googleapis.com\u002Fcss?family=Roboto:100,300,400,500,700,900&display=swap"},{"rel":"stylesheet","type":"text\u002Fcss","href":"https:\u002F\u002Fcdn.jsdelivr.net\u002Fnpm\u002F@mdi\u002Ffont@latest\u002Fcss\u002Fmaterialdesignicons.min.css"},{"rel":"manifest","href":"\u002F_nuxt\u002Fmanifest.52e47a06.json"},{"rel":"shortcut icon","href":"\u002F_nuxt\u002Ficons\u002Ficon_64.5f6a36.png"},{"rel":"apple-touch-icon","href":"\u002F_nuxt\u002Ficons\u002Ficon_512.5f6a36.png","sizes":"512x512"}],"style":[],"htmlAttrs":{"lang":"en"}},
 
     store,
     router,
@@ -193,6 +194,10 @@ async function createApp (ssrContext) {
     await nuxt_plugin_plugin_2fb498dc(app.context, inject)
   }
 
+  if (typeof nuxt_plugin_cookieuniversalnuxt_10d2c210 === 'function') {
+    await nuxt_plugin_cookieuniversalnuxt_10d2c210(app.context, inject)
+  }
+
   if (process.client && typeof nuxt_plugin_toast_432b3f17 === 'function') {
     await nuxt_plugin_toast_432b3f17(app.context, inject)
   }
@@ -205,12 +210,12 @@ async function createApp (ssrContext) {
     await nuxt_plugin_localStorage_830ec59e(app.context, inject)
   }
 
-  if (process.client && typeof nuxt_plugin_cookies_2c3cf8fe === 'function') {
-    await nuxt_plugin_cookies_2c3cf8fe(app.context, inject)
+  if (typeof nuxt_plugin_day_6fad285e === 'function') {
+    await nuxt_plugin_day_6fad285e(app.context, inject)
   }
 
-  if (typeof nuxt_plugin_plugin_9d66dcb8 === 'function') {
-    await nuxt_plugin_plugin_9d66dcb8(app.context, inject)
+  if (typeof nuxt_plugin_axios_5659d192 === 'function') {
+    await nuxt_plugin_axios_5659d192(app.context, inject)
   }
 
   // If server-side, wait for async component to be resolved first

@@ -9,19 +9,19 @@
               <v-text-field
                 label="Name"
                 prepend-icon="person"
-                v-model="name"
+                v-model="form.name"
               ></v-text-field>
 
               <v-text-field
                 label="Email"
                 prepend-icon="email"
-                v-model="email"
+                v-model="form.email"
               ></v-text-field>
 
               <v-text-field
                 label="Password"
                 prepend-icon="vpn_key"
-                v-model="password"
+                v-model="form.password"
               ></v-text-field>
             </v-form>
           </v-card-text>
@@ -34,38 +34,27 @@
 
 <script>
 export default {
-  middleware: 'auth',
-  auth: 'guest',
+  // middleware: 'guest',
   data() {
     return {
-      name: "",
-      email: "",
-      password: ""
+      form: {
+        name: "",
+        email: "",
+        password: ""
+      }
     }
   },
   methods: {
     async onRegister() {
       try {
-        const data = {
-          name: this.name,
-          email: this.email,
-          password: this.password
-        }
-        const response = await this.$axios.$post('/api/auth/register', data)
-        if (response.success) {
-          await this.$auth.loginWith('local', {
-            data: {
-              email: this.email,
-              password: this.password
-            }
-          })
-
+        const { success } = await this.$axios.$post('/api/auth/register', this.form)
+        if (success) {
+          await this.$store.dispatch('auth/login', this.form)
           this.$toast.success('登録完了しました');
           this.$router.push('/')
         }
       } catch (err) {
-        this.$toast.error(err);
-        console.log(err)
+        this.$toast.error(err.message);
       }
     }
   }

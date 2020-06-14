@@ -74,7 +74,7 @@
                     <v-col cols="12">
                       <v-radio-group v-model="arrivalDate" :mandatory="true" block>
                         <v-radio :label="`通常配送(配達予定日: ${defaultArrivalDate})`" :value="defaultArrivalDate"></v-radio>
-                        <v-radio :label="`最短(配達予定日: ${earlyArrivalDate})`" :value="earlyArrivalDate"></v-radio>
+                        <v-radio :label="`最短(配達予定日: ${earlyArrivalDate}, )`" :value="earlyArrivalDate"></v-radio>
                       </v-radio-group>
                       <v-btn large rounded dark @click="checkdShipment = true">支払いに進む</v-btn>
                     </v-col>
@@ -93,7 +93,6 @@
 </template>
 
 <script>
-import moment from 'moment'
 import Stripe from '@/components/Stripe'
 import {mapGetters} from 'vuex'
 export default {
@@ -102,19 +101,18 @@ export default {
     Stripe,
   },
   async asyncData({$axios}) {
-    const response = await $axios.$get('/api/addresses')
-    console.log(response)
+    const { addres } = await $axios.$get('/api/addresses')
     return {
-      address: response.address
+      address
     }
   },
   computed: {
     ...mapGetters(["getCartTotalPrice", "getCartLength"]),
     defaultArrivalDate() {
-      return moment().add(5,"d").format("YYYY-MM-DD");
+      return this.$dayjs().add(5, "d").format('YYYY-MM-DD');
     },
     earlyArrivalDate() {
-      return moment().add(2,"d").format("YYYY-MM-DD");
+      return this.$dayjs().add(2, "d").format('YYYY-MM-DD');
     }
   },
   data() {

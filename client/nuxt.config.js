@@ -1,6 +1,7 @@
 import colors from 'vuetify/es5/util/colors'
 
-const URL = process.env.NODE_ENV !== 'production' ? 'http://localhost:4000' : "https://piltan0xng.execute-api.ap-northeast-1.amazonaws.com/prod"
+const URL = process.env.NODE_ENV !== 'production' ? 'http://localhost:4000' : "https://w9g5xgetw8.execute-api.ap-northeast-1.amazonaws.com/prod"
+// const URL = process.env.NODE_ENV !== 'production' ? 'http://localhost:4000' : "https://server-9swuwd12a.vercel.app/"
 
 export default {
   mode: 'universal',
@@ -17,9 +18,6 @@ export default {
       { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'stylesheet', type: 'image/x-icon', href: 'https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css' },
-      { rel: 'stylesheet',  href: 'https://fonts.googleapis.com/icon?family=Material+Icons' }
     ]
   },
   /*
@@ -30,11 +28,12 @@ export default {
   ** Global CSS
   */
   css: [
+    '@/assets/css/iconfont/material-icons.css'
   ],
 
   plugins: [
     { src: "~/plugins/localStorage.js", mode: 'client'},
-    { src: "~/plugins/cookies.js", mode: 'client'}
+    { src: "~/plugins/day.js"}
   ],
   /*
   ** Nuxt.js dev-modules
@@ -48,38 +47,13 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
     // 'nuxt-material-design-icons',
-    '@nuxtjs/auth',
-    '@nuxtjs/toast'
+    '@nuxtjs/toast',
+    'cookie-universal-nuxt'
   ],
-  /*
-  ** Axios module configuration
-  ** See https://axios.nuxtjs.org/options
-  */
   axios: {
-    baseURL: URL
+    baseURL: URL,
+    credentials : true
   },
-
-  auth: {
-    cookie:false,
-    strategies: {
-      local: {
-        endpoints: {
-          login: {
-            url: '/api/auth/login',
-            method: 'post',
-            propertyName: "token"
-          },
-          logout: false,
-          user: {
-            method: 'get',
-            url: '/api/auth/user',
-            propertyName: 'user' // <--- Default "user"
-          }
-        }
-      },
-    }
-  },
-
   toast: {
     // 右上にtoastを表示
     position: 'top-right',
@@ -105,7 +79,6 @@ export default {
       }
     }
   },
-
   build: {
     /*
     ** You can extend webpack config here

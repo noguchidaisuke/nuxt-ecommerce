@@ -1,9 +1,7 @@
-
 export const state = () => ({
   cart: [],
   cartLength: 0
 })
-
 
 export const actions = {
   addToCart({state, commit}, product) {
@@ -13,8 +11,20 @@ export const actions = {
     } else {
       commit('incrementQuantity',cartProduct)
     }
-
     commit('incrementCartLength')
+  },
+
+  buyNow({state, commit}, product) {
+    const cartProduct = state.cart.find(prod => prod._id === product._id)
+    if(!cartProduct) {
+      commit('pushToCart', product)
+    }
+    commit('incrementCartLength')
+  },
+
+  async nuxtServerInit({dispatch}) {
+    // SET AUTH USER
+    await dispatch('auth/fetchUser').catch(_ => console.log("Not Authorized!"))
   }
 }
 
@@ -50,11 +60,13 @@ export const mutations = {
       })
     }
   },
+
   removeProductFromCart(state, product) {
     state.cartLength -= product.quantity
     let index = state.cart.indexOf(product)
     state.cart.splice(index, 1)
   },
+
   clearCart(state) {
     state.cart = [];
     state.cartLength = 0
