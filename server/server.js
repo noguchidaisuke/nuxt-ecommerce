@@ -32,7 +32,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(cors({credentials: true, origin: true}))
 app.use(cookieParser('dsafaasfaf'))
-app.use(csrf({ cookie: true }));
+app.use(csrf({ cookie: true }))
 
 // router
 const userRoute     = require('./routes/auth')
@@ -61,6 +61,7 @@ app.get('/api/csrfToken', (req, res) => {
 })
 
 app.post('/api/example', (req, res) => {
+  console.log(req.headers);
   return res.json("プロテク")
 })
 

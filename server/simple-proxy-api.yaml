@@ -40,6 +40,8 @@ paths:
               type: string
             Access-Control-Allow-Headers:
               type: string
+            Access-Control-Allow-Credentials:
+              type: string
       x-amazon-apigateway-integration:
         contentHandling: CONVERT_TO_TEXT
         responses:
@@ -47,8 +49,9 @@ paths:
             statusCode: 200
             responseParameters:
               method.response.header.Access-Control-Allow-Methods: "'DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT'"
-              method.response.header.Access-Control-Allow-Headers: "'Content-Type,Authorization,X-Amz-Date,X-Api-Key,X-Amz-Security-Token'"
-              method.response.header.Access-Control-Allow-Origin: "'https://nuxt-client-ohd7fxhn1.now.sh'"
+              method.response.header.Access-Control-Allow-Headers: "'Content-Type,Authorization,X-Amz-Date,X-Api-Key,X-Amz-Security-Token,x-csrf-token'"
+              method.response.header.Access-Control-Allow-Origin: "'https://nuxt-client-6w99ghjwv.vercel.app'"
+              method.response.header.Access-Control-Allow-Credentials: "'true'"
         passthroughBehavior: when_no_match
         requestTemplates:
           application/json: "{\"statusCode\": 200}"
@@ -84,6 +87,8 @@ paths:
               type: string
             Access-Control-Allow-Headers:
               type: string
+            Access-Control-Allow-Credentials:
+              type: string
       x-amazon-apigateway-integration:
         contentHandling: CONVERT_TO_TEXT
         responses:
@@ -91,8 +96,9 @@ paths:
             statusCode: 200
             responseParameters:
               method.response.header.Access-Control-Allow-Methods: "'DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT'"
-              method.response.header.Access-Control-Allow-Headers: "'Content-Type,Authorization,X-Amz-Date,X-Api-Key,X-Amz-Security-Token'"
-              method.response.header.Access-Control-Allow-Origin: "'https://nuxt-client-ohd7fxhn1.now.sh'"
+              method.response.header.Access-Control-Allow-Headers: "'Content-Type,Authorization,X-Amz-Date,X-Api-Key,X-Amz-Security-Token,x-csrf-token'"
+              method.response.header.Access-Control-Allow-Origin: "'https://nuxt-client-6w99ghjwv.vercel.app'"
+              method.response.header.Access-Control-Allow-Credentials: "'true'"
         passthroughBehavior: when_no_match
         requestTemplates:
           application/json: "{\"statusCode\": 200}"

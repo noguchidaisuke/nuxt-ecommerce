@@ -1,7 +1,7 @@
 import colors from 'vuetify/es5/util/colors'
 
-// const URL = process.env.NODE_ENV !== 'production' ? 'http://localhost:4000' : "https://piltan0xng.execute-api.ap-northeast-1.amazonaws.com/prod"
-const URL = process.env.NODE_ENV !== 'production' ? 'http://localhost:4000' : "https://server-mk2ve1dem.vercel.app/"
+// const URL = process.env.NODE_ENV !== 'production' ? 'http://localhost:4000' : "https://w9g5xgetw8.execute-api.ap-northeast-1.amazonaws.com/prod"
+const URL = process.env.NODE_ENV !== 'production' ? 'http://localhost:4000' : "https://server-9swuwd12a.vercel.app/"
 
 export default {
   mode: 'universal',

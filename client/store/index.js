@@ -23,7 +23,7 @@ export const actions = {
     commit('incrementCartLength')
   },
 
-  async nuxtServerInit({dispatch, commit}, { $axios }) {
+  async nuxtServerInit({dispatch, commit, state}, { $axios }) {
     // CSRF TOKEN
     const { csrfToken } = await $axios.$get('/api/csrfToken')
     if (csrfToken) commit('SET_CSRF_TOKEN', csrfToken)
