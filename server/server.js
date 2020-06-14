@@ -4,12 +4,11 @@ const mongoose          = require('mongoose')
 const cors              = require('cors')
 const serverlessExpress = require('aws-serverless-express/middleware')
 const cookieParser      = require('cookie-parser')
-const csrf              = require('csurf')
 require('dotenv').config()
 
-// const isProd = () => {
-//   return !!process.env.AWS_REGION
-// }
+const isProd = () => {
+  return !!process.env.AWS_REGION
+}
 
 mongoose.connect(process.env.DATABASE,{ useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, },err => {
   if (err) {
@@ -32,7 +31,6 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(cors({credentials: true, origin: true}))
 app.use(cookieParser('dsafaasfaf'))
-app.use(csrf({ cookie: true }))
 
 // router
 const userRoute     = require('./routes/auth')
@@ -56,19 +54,10 @@ app.get('/api/cookies', (req, res) => {
   res.json("success!")
 })
 
-app.get('/api/csrfToken', (req, res) => {
-  return res.json({ csrfToken: req.csrfToken() });
-})
-
-app.post('/api/example', (req, res) => {
-  console.log(req.headers);
-  return res.json("プロテク")
-})
-
-// if (isProd()) {
-//   app.use(serverlessExpress.eventContext())
-//   module.exports = app;
-// } else {
-//   app.listen(4000)
-// }
-app.listen(4000)
+if (isProd()) {
+  app.use(serverlessExpress.eventContext())
+  module.exports = app;
+} else {
+  app.listen(4000)
+}
+// app.listen(4000)

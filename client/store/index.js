@@ -1,7 +1,6 @@
 export const state = () => ({
   cart: [],
-  cartLength: 0,
-  csrfToken: ''
+  cartLength: 0
 })
 
 export const actions = {
@@ -23,10 +22,7 @@ export const actions = {
     commit('incrementCartLength')
   },
 
-  async nuxtServerInit({dispatch, commit, state}, { $axios }) {
-    // CSRF TOKEN
-    const { csrfToken } = await $axios.$get('/api/csrfToken')
-    if (csrfToken) commit('SET_CSRF_TOKEN', csrfToken)
+  async nuxtServerInit({dispatch}) {
     // SET AUTH USER
     await dispatch('auth/fetchUser').catch(_ => console.log("Not Authorized!"))
   }
@@ -74,10 +70,6 @@ export const mutations = {
   clearCart(state) {
     state.cart = [];
     state.cartLength = 0
-  },
-
-  SET_CSRF_TOKEN(state, csrfToken) {
-    state.csrfToken = csrfToken
   }
 }
 

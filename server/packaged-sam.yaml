@@ -5,7 +5,7 @@ Resources:
   ApiGatewayApi:
     Type: AWS::Serverless::Api
     Properties:
-      DefinitionUri: s3://express-serverless-v1/407b90903a5eb8460155a9c40497fa38
+      DefinitionUri: s3://express-serverless-v1/750225c3320a1c165d2c7448a881ed8c
       StageName: prod
       Variables:
         ServerlessExpressLambdaFunctionName:
@@ -54,7 +54,7 @@ Resources:
   AwsServerlessExpressFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://express-serverless-v1/0a269dff54ba2a6fc1232469cb6c3ef2
+      CodeUri: s3://express-serverless-v1/a7e3fe534a735992f269c73ef0a323b9
       Handler: lambda.handler
       MemorySize: 1024
       Role:
