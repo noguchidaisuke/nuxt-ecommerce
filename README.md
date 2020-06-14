@@ -5,13 +5,23 @@
 # description
 
 > 簡単なECサイト
-> UI + APIで１週間
-> セキュリティ + デプロイ + デバックで３日前後
 
-# tech
-> Backend: Express
-> Frontend: Nuxt SSR
-> Deploy: backend => lambda / frontend => now
+# 期間
+> UI: 3日
+
+> BFF: 4日
+
+> セキュリティ + デプロイ 多分１週間くらい
+
+# 技術
+> フロントエンド: Nuxt
+
+> バックエンド: Express
+
+> デプロイ: Now + Lambda
+
+# しんどかった点
+> ライフサイクルフックの理解。特にJWTtokenをLocalStorage => Cookieに移行する際に躓いた。
 
 ## Build Setup
 
